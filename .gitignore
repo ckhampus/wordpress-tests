@@ -1,2 +1,4 @@
 /build
 /unittests-config.php
+vendor
+composer.phar

@@ -11,17 +11,17 @@ $config_file_path = $argv[1];
 $config_dir = dirname( $config_file_path );
 
 define( 'WP_INSTALLING', true );
-require_once $config_file_path;
-require_once dirname( __FILE__ ). '/../lib/functions.php';
+require_once($config_file_path);
+require_once(realpath(dirname( __FILE__ ). '/../lib/functions.php'));
 
 $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
 $_SERVER['HTTP_HOST'] = WP_TESTS_DOMAIN;
 $PHP_SELF = $GLOBALS['PHP_SELF'] = $_SERVER['PHP_SELF'] = '/index.php';
 
-require_once ABSPATH . '/wp-settings.php';
+require_once(ABSPATH . '/wp-settings.php');
 
-require_once ABSPATH . '/wp-admin/includes/upgrade.php';
-require_once ABSPATH . '/wp-includes/wp-db.php';
+require_once(ABSPATH . '/wp-admin/includes/upgrade.php');
+require_once(ABSPATH . '/wp-includes/wp-db.php');
 
 define( 'WP_TESTS_VERSION_FILE', ABSPATH . '.wp-tests-version' );
 

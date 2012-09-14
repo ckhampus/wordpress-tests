@@ -1,0 +1,19 @@
+{
+    "name": "ckhampus/wordpress-tests",
+    "description": "Testing library for Wordpress",
+    "authors": [
+        {
+            "name": "Cristian Hampus",
+            "email": "contact@cristianhampus.se"
+        }
+    ],
+    "require": {
+        "symfony/http-foundation": "dev-master"
+    },
+    "require-dev": {
+        "symfony/console": "dev-master",
+        "symfony/filesystem": "dev-master",
+        "symfony/finder": "dev-master",
+        "fabpot/php-cs-fixer": "dev-master"
+    }
+}
