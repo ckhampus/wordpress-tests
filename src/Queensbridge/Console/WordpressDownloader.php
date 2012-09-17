@@ -4,22 +4,23 @@ namespace Queensbridge\Console;
 
 use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOException;
 
 $fs = new Filesystem();
 
-class WordpressDownloader {
+class WordpressDownloader
+{
     private $path;
 
     private $cwd;
 
-    public function __construct($path, $cwd = NULL)
+    public function __construct($path, $cwd = null)
     {
         $this->cwd = $cwd ? $cwd : getcwd();
         $this->path = $path;
     }
 
-    public function download($url) {
+    public function download($url)
+    {
         $fs = new Filesystem();
 
         if (!$fs->exists($this->path)) {

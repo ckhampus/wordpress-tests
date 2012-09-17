@@ -105,20 +105,21 @@ class WordpressInstaller
      * codebase and current configuration
      * @return string $hash sha1 hash
      */
-    public function testVersionCheckHash() {
+    public function testVersionCheckHash()
+    {
         $hash = '';
 
         $db_version = get_option( 'db_version' );
 
         if (defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE ) {
             $version = $db_version;
-            if(defined( 'WP_TESTS_BLOGS' )) {
+            if (defined( 'WP_TESTS_BLOGS' )) {
                 $version .= WP_TESTS_BLOGS;
             }
-            if( defined( 'WP_TESTS_SUBDOMAIN_INSTALL' ) ) {
+            if ( defined( 'WP_TESTS_SUBDOMAIN_INSTALL' ) ) {
                 $version .= WP_TESTS_SUBDOMAIN_INSTALL;
             }
-            if( defined( 'WP_TESTS_DOMAIN' ) ) {
+            if ( defined( 'WP_TESTS_DOMAIN' ) ) {
                 $version .= WP_TESTS_DOMAIN;
             }
 
