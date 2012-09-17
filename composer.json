@@ -8,12 +8,19 @@
         }
     ],
     "require": {
-        "symfony/http-foundation": "dev-master"
+        "symfony/http-foundation": "dev-master",
+        "symfony/process": "dev-master",
+        "symfony/filesystem": "dev-master",
+        "symfony/finder": "dev-master",
+        "symfony/yaml": "dev-master"
     },
     "require-dev": {
         "symfony/console": "dev-master",
-        "symfony/filesystem": "dev-master",
-        "symfony/finder": "dev-master",
         "fabpot/php-cs-fixer": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Queensbridge": "src/"
+        }
     }
 }

@@ -13,8 +13,8 @@ class WordpressTestCase extends \PHPUnit_Framework_TestCase
         $wpdb->show_errors = true;
         $wpdb->db_connect();
         ini_set('display_errors', 1 );
-        $this->clean_up_global_scope();
-        $this->start_transaction();
+        $this->clearGlobals();
+        $this->startTransaction();
     }
 
     public function tearDown()
@@ -42,6 +42,7 @@ class WordpressTestCase extends \PHPUnit_Framework_TestCase
         $wp_object_cache->stats = array();
         $wp_object_cache->memcache_debug = array();
         $wp_object_cache->cache = array();
+
         if (method_exists($wp_object_cache, '__remoteset')) {
             $wp_object_cache->__remoteset();
         }
@@ -64,9 +65,24 @@ class WordpressTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->clearGlobals();
 
-        foreach (array('query_string', 'id', 'postdata', 'authordata', 'day', 'currentmonth', 'page', 'pages', 'multipage', 'more', 'numpages', 'pagenow') as $v) {
-            if (isset($GLOBALS[$v])) {
-                unset($GLOBALS[$v]);
+        $vars = array(
+            'query_string',
+            'id',
+            'postdata',
+            'authordata',
+            'day',
+            'currentmonth',
+            'page',
+            'pages',
+            'multipage',
+            'more',
+            'numpages',
+            'pagenow'
+        );
+
+        foreach ($vars as $var) {
+            if (isset($GLOBALS[$var])) {
+                unset($GLOBALS[$var]);
             }
         }
 
@@ -74,9 +90,9 @@ class WordpressTestCase extends \PHPUnit_Framework_TestCase
         $request->overrideGlobals();
 
         unset($GLOBALS['wp_query'], $GLOBALS['wp_the_query']);
-        $GLOBALS['wp_the_query'] =& new WP_Query();
+        $GLOBALS['wp_the_query'] =& new \WP_Query();
         $GLOBALS['wp_query'] =& $GLOBALS['wp_the_query'];
-        $GLOBALS['wp'] =& new WP();
+        $GLOBALS['wp'] =& new \WP();
 
         // clean out globals to stop them polluting wp and wp_query
         foreach ($GLOBALS['wp']->public_query_vars as $v) {
