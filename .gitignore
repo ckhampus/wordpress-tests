@@ -1,4 +1,6 @@
-/build
-/unittests-config.php
+build
+unittests-config.php
 vendor
 composer.phar
+bin/behat*
+bin/php-cs-fixer

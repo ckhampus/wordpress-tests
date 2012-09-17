@@ -4,7 +4,7 @@ namespace Queensbridge\Console;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class WordpressInstaller
+class Installer
 {
     private $config;
 

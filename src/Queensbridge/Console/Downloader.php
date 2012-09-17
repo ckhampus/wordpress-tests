@@ -5,9 +5,10 @@ namespace Queensbridge\Console;
 use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Filesystem\Filesystem;
 
-$fs = new Filesystem();
-
-class WordpressDownloader
+/**
+ * Download a git repository.
+ */
+class Downloader
 {
     private $path;
 
@@ -19,7 +20,7 @@ class WordpressDownloader
         $this->path = $path;
     }
 
-    public function download($url)
+    public function fetch($url)
     {
         $fs = new Filesystem();
 
