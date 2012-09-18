@@ -1,121 +1,6 @@
 {
-    "hash": "d924adf2853fdf8078e8af1ba5b9e0f8",
+    "hash": "cb3d118e456ca46efa924987cd38418f",
     "packages": [
-        {
-            "name": "behat/behat",
-            "version": "v2.4.4",
-            "source": {
-                "type": "git",
-                "url": "git://github.com/Behat/Behat.git",
-                "reference": "v2.4.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/Behat/Behat/zipball/v2.4.4",
-                "reference": "v2.4.4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1",
-                "behat/gherkin": ">=2.2.4,<2.3.0-dev",
-                "symfony/console": ">=2.0.0,<2.2.0-dev",
-                "symfony/config": ">=2.0.0,<2.2.0-dev",
-                "symfony/dependency-injection": ">=2.0.0,<2.2.0-dev",
-                "symfony/event-dispatcher": ">=2.0.0,<2.2.0-dev",
-                "symfony/translation": ">=2.0.0,<2.2.0-dev",
-                "symfony/yaml": ">=2.0.0,<2.2.0-dev",
-                "symfony/finder": ">=2.0.0,<2.2.0-dev"
-            },
-            "suggest": {
-                "behat/symfony2-extension": "for integration with Symfony2 web framework",
-                "behat/yii-extension": "for integration with Yii web framework",
-                "behat/mink-extension": "for integration with Mink testing framework"
-            },
-            "time": "2012-09-04 04:59:18",
-            "bin": [
-                "bin/behat"
-            ],
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-0": {
-                    "Behat\\Behat": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com",
-                    "homepage": "http://everzet.com"
-                }
-            ],
-            "description": "Scenario-oriented BDD framework for PHP 5.3",
-            "homepage": "http://behat.org/",
-            "keywords": [
-                "Symfony2",
-                "BDD",
-                "Behat"
-            ]
-        },
-        {
-            "name": "behat/gherkin",
-            "version": "v2.2.4",
-            "source": {
-                "type": "git",
-                "url": "git://github.com/Behat/Gherkin.git",
-                "reference": "v2.2.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/Behat/Gherkin/zipball/v2.2.4",
-                "reference": "v2.2.4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1",
-                "symfony/finder": ">=2.0,<2.2-dev"
-            },
-            "require-dev": {
-                "symfony/yaml": ">=2.0,<2.2-dev",
-                "symfony/translation": ">=2.0,<2.2-dev",
-                "symfony/config": ">=2.0,<2.2-dev"
-            },
-            "suggest": {
-                "symfony/yaml": "If you want to parse features, represented in YAML files",
-                "symfony/translation": "If you want to use Symfony2 translations adapter",
-                "symfony/config": "If you want to use Config component to manage resources"
-            },
-            "time": "2012-08-02 21:25:15",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-0": {
-                    "Behat\\Gherkin": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com",
-                    "homepage": "http://everzet.com"
-                }
-            ],
-            "description": "Gherkin DSL parser for PHP 5.3",
-            "homepage": "http://behat.org/",
-            "keywords": [
-                "Symfony2",
-                "BDD",
-                "parser",
-                "DSL",
-                "Behat"
-            ]
-        },
         {
             "name": "behat/mink",
             "version": "v1.4.0",
@@ -149,7 +34,7 @@
                 "behat/mink-selenium2-driver": "to enable Selenium2 (webdriver support)",
                 "behat/mink-zombie-driver": "to enable Zombie.js support"
             },
-            "time": "2012-05-29 12:50:10",
+            "time": "2012-05-29 10:50:10",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -218,55 +103,6 @@
                 "Symfony2",
                 "testing",
                 "browser"
-            ]
-        },
-        {
-            "name": "behat/mink-extension",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "git://github.com/Behat/MinkExtension.git",
-                "reference": "v1.0.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/Behat/MinkExtension/zipball/v1.0.0",
-                "reference": "v1.0.0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "behat/behat": ">=2.4.0,<2.5.0-dev",
-                "behat/mink": ">=1.4.0,<1.5.0-dev"
-            },
-            "require-dev": {
-                "behat/mink-goutte-driver": "*"
-            },
-            "time": "2012-07-04 23:59:06",
-            "type": "behat-extension",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-0": {
-                    "Behat\\MinkExtension": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com",
-                    "homepage": "http://everzet.com"
-                }
-            ],
-            "description": "Mink extension for Behat",
-            "homepage": "http://mink.behat.org",
-            "keywords": [
-                "test",
-                "browser",
-                "web",
-                "gui"
             ]
         },
         {
@@ -369,6 +205,54 @@
             ]
         },
         {
+            "name": "behat/mink-selenium2-driver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/Behat/MinkSelenium2Driver.git",
+                "reference": "baaf9c08bfa4c88b7179b3856197258a63e1b17e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Behat/MinkSelenium2Driver/zipball/baaf9c08bfa4c88b7179b3856197258a63e1b17e",
+                "reference": "baaf9c08bfa4c88b7179b3856197258a63e1b17e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "instaclick/php-webdriver": "@dev",
+                "behat/mink": "1.4.*"
+            },
+            "time": "1347895517",
+            "type": "mink-driver",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Mink\\Driver": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Selenium2 (WebDriver) driver for Mink framework",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "javascript",
+                "testing",
+                "browser",
+                "ajax",
+                "selenium",
+                "webdriver"
+            ]
+        },
+        {
             "name": "behat/mink-zombie-driver",
             "version": "dev-master",
             "source": {
@@ -434,7 +318,7 @@
                 "php": ">=5.3.1",
                 "kriswallsmith/buzz": ">=0.5"
             },
-            "time": "2011-12-21 10:04:09",
+            "time": "2011-12-21 09:04:09",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -531,7 +415,7 @@
                 "php": ">=5.3.2",
                 "symfony/event-dispatcher": "2.1.*"
             },
-            "time": "2012-09-05 23:30:30",
+            "time": "2012-09-05 21:30:30",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -575,7 +459,7 @@
                 "guzzle/common": "self.version",
                 "guzzle/parser": "self.version"
             },
-            "time": "2012-09-02 19:01:34",
+            "time": "2012-09-02 17:01:34",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -614,7 +498,7 @@
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "2012-08-17 05:22:25",
+            "time": "2012-08-17 03:22:25",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -633,6 +517,55 @@
                 "message",
                 "cookie",
                 "URI Template"
+            ]
+        },
+        {
+            "name": "instaclick/php-webdriver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/instaclick/php-webdriver",
+                "reference": "v1.0.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/instaclick/php-webdriver/zipball/v1.0.6",
+                "reference": "v1.0.6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "time": "1345642676",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "WebDriver": "lib/"
+                }
+            },
+            "license": [
+                "Apache"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Bishop",
+                    "email": "jubishop@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anthon Pang",
+                    "email": "anthonp@nationalfibre.net",
+                    "role": "Fork Maintainer"
+                }
+            ],
+            "description": "PHP WebDriver for Selenium 2",
+            "homepage": "http://instaclick.com/torontotechjobs/",
+            "keywords": [
+                "browser",
+                "selenium",
+                "webdriver",
+                "webtest"
             ]
         },
         {
@@ -736,53 +669,6 @@
             "homepage": "http://symfony.com"
         },
         {
-            "name": "symfony/config",
-            "version": "2.1.x-dev",
-            "target-dir": "Symfony/Component/Config",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Config",
-                "reference": "v2.1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/symfony/Config/zipball/v2.1.1",
-                "reference": "v2.1.1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Config": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Config Component",
-            "homepage": "http://symfony.com",
-            "time": "1345643321"
-        },
-        {
             "name": "symfony/console",
             "version": "2.1.x-dev",
             "target-dir": "Symfony/Component/Console",
@@ -875,61 +761,6 @@
             "description": "Symfony CssSelector Component",
             "homepage": "http://symfony.com",
             "time": "1345643321"
-        },
-        {
-            "name": "symfony/dependency-injection",
-            "version": "2.1.x-dev",
-            "target-dir": "Symfony/Component/DependencyInjection",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/DependencyInjection",
-                "reference": "cb04ee0298826a086ab6fd007b2785191958df9b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/symfony/DependencyInjection/zipball/cb04ee0298826a086ab6fd007b2785191958df9b",
-                "reference": "cb04ee0298826a086ab6fd007b2785191958df9b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "symfony/yaml": "2.1.*",
-                "symfony/config": "2.1.*"
-            },
-            "suggest": {
-                "symfony/yaml": "2.1.*",
-                "symfony/config": "2.1.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\DependencyInjection": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony DependencyInjection Component",
-            "homepage": "http://symfony.com",
-            "time": "1347914517"
         },
         {
             "name": "symfony/dom-crawler",
@@ -1056,7 +887,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-08-22 01:48:41",
+            "time": "2012-08-21 23:48:41",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1103,7 +934,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-08-22 01:48:41",
+            "time": "2012-08-21 23:48:41",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1150,7 +981,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-09-04 00:24:42",
+            "time": "2012-09-03 22:24:42",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1198,7 +1029,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-08-30 00:49:05",
+            "time": "2012-08-29 22:49:05",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1228,61 +1059,6 @@
             "homepage": "http://symfony.com"
         },
         {
-            "name": "symfony/translation",
-            "version": "2.1.x-dev",
-            "target-dir": "Symfony/Component/Translation",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Translation",
-                "reference": "v2.1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/symfony/Translation/zipball/v2.1.1",
-                "reference": "v2.1.1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "symfony/config": "2.1.*",
-                "symfony/yaml": "2.1.*"
-            },
-            "suggest": {
-                "symfony/config": "2.1.*",
-                "symfony/yaml": "2.1.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Translation": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Translation Component",
-            "homepage": "http://symfony.com",
-            "time": "1347274422"
-        },
-        {
             "name": "symfony/yaml",
             "version": "v2.1.1",
             "target-dir": "Symfony/Component/Yaml",
@@ -1300,7 +1076,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-08-22 01:48:41",
+            "time": "2012-08-21 23:48:41",
             "type": "library",
             "extra": {
                 "branch-alias": {

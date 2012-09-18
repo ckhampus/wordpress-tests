@@ -16,6 +16,7 @@
         "behat/mink": "v1.4.0",
         "behat/mink-zombie-driver": "*",
         "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
         "behat/mink-sahi-driver": "*"
     },
     "require-dev": {

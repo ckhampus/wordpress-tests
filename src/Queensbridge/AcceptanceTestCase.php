@@ -3,6 +3,7 @@
 namespace Queensbridge;
 
 use Behat\Mink\Driver\ZombieDriver;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Driver\NodeJS\Server\ZombieServer;
 use Behat\Mink\Driver\GoutteDriver;
 use Behat\Mink\Mink;
@@ -10,6 +11,7 @@ use Behat\Mink\Session;
 use Behat\Mink\Selector\NamedSelector;
 use Behat\Mink\Selector\CssSelector;
 use Behat\Mink\Selector\SelectorsHandler;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 
 class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 {
@@ -17,10 +19,6 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        //$driver = new Selenium2Driver('firefox', 'base_url');
-        //$server = new ZombieServer('127.0.0.1', '1337');
-        //$driver = new ZombieDriver($server);
-
         $handler  = new SelectorsHandler(array(
             'named' => new NamedSelector(),
             'css' => new CssSelector()
@@ -29,8 +27,9 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         $goutte = new GoutteDriver();
         $noJsSession = new Session($goutte, $handler);
 
-        $zombie = new ZombieDriver(new ZombieServer());
-        $jsSession = new Session($zombie, $handler);
+        //$zombie = new ZombieDriver(new ZombieServer());
+        $selenium = new Selenium2Driver('firefox');
+        $jsSession = new Session($selenium, $handler);
 
         self::$mink = new Mink();
         self::$mink->registerSession('nojs', $noJsSession);
@@ -75,7 +74,7 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function clickLink($link)
     {
-        $el = $this->getPage()->findLink($link);
+        $el = $this->findLink($link);
         $el->click();
 
         return $el;
@@ -83,7 +82,7 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function clickButton($button)
     {
-        $el = $this->getPage()->findButton($button);
+        $el = $this->findButton($button);
         $el->click();
 
         return $el;
@@ -91,7 +90,7 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function clickOn($linkOrButton)
     {
-        $el = $this->getPage()->find('named', array('link_or_button', $linkOrButton));
+        $el = $this->find('named', array('link_or_button', $linkOrButton));
         $el->click();
 
         return $el;
@@ -99,7 +98,7 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function fillIn($field, $value)
     {
-        $el = $this->getPage()->findField($field);
+        $el = $this->findField($field);
         $el->setValue($value);
 
         return $el;
@@ -112,7 +111,7 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function check($checkbox)
     {
-        $el = $this->getPage()->findField($checkbox);
+        $el = $this->findField($checkbox);
 
         if (!$el->isChecked()) {
             $el->check();
@@ -123,7 +122,7 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function uncheck($checkbox)
     {
-        $el = $this->getPage()->findField($checkbox);
+        $el = $this->findField($checkbox);
 
         if ($el->isChecked()) {
             $el->uncheck();
@@ -134,11 +133,45 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function select($option, $selectBox)
     {
-        $this->getPage()->findField($selectBox)->selectOption($option);
+        $this->findField($selectBox)->selectOption($option);
+    }
+
+    public function find($handler, $value)
+    {
+        return $this->getPage()->find($handler, $value);
+    }
+
+    public function findLink($link)
+    {
+        return $this->getPage()->findLink($link);
+    }
+
+    public function findButton($button)
+    {
+        return $this->getPage()->findButton($button);
+    }
+
+    public function findField($field)
+    {
+        return $this->getPage()->findField($field);
     }
 
     public function assertStatusCodeEquals($code)
     {
-        $this->assertEquals($code, $this->getSession()->getStatusCode());
+        try {
+            $this->assertEquals($code, $this->getSession()->getStatusCode());
+        } catch (UnsupportedDriverActionException $e) { }
+    }
+
+    public function assertPageHasContent($content)
+    {
+        $el = $this->find('named', array('content', $content));
+        $this->assertNotNull($el);
+    }
+
+    public function assertPageHasSelector($selector)
+    {
+        $el = $this->find('css', $selector);
+        $this->assertNotNull($el);
     }
 }
