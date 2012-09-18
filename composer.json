@@ -1,13 +1,14 @@
 {
-    "name": "ckhampus/wordpress-tests",
+    "name": "queensbridge/wordpress-tests",
     "description": "Testing library for Wordpress",
     "authors": [
         {
             "name": "Cristian Hampus",
-            "email": "contact@cristianhampus.se"
+            "email": "cristian@queensbridge.se"
         }
     ],
     "require": {
+        "php": ">=5.3.0",
         "symfony/http-foundation": "v2.1.1",
         "symfony/process": "v2.1.1",
         "symfony/filesystem": "v2.1.1",
