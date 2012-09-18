@@ -44,6 +44,7 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        self::$mink->setDefaultSessionName('nojs');
         self::$mink->resetSessions();
     }
 

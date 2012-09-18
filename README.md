@@ -1,16 +1,46 @@
-## Rationale
+# WordPress Tests
+This is a library for writing tests for plugins, themes and sites. 
 
-The advantages of this framework:
+## Unit tests
+The `UnitTestCase` class is used just like the normal `PHPUnit_Framework_TestCase` class. Right it is basically just a shortcut.
 
-* faster
-* runs every test case in a clean WordPress install
-* uses the default PHPUnit runner, instead of custom one
-* doesn't encourage or support the usage of shared/prebuilt fixtures
+## Integration tests
+The `IntegrationTestCase` class allows you to test against and use WordPress functions in your tests.
 
-It uses SQL transactions to clean up automatically after each test.
+```php
+class SinglePageTest extends IntegrationTestCase
+{
+    public function testSingle()
+    {
+        $this->visit(get_permalink(1));
+        $this->assertTrue(is_single());
+        $this->assertTrue(have_posts());
+    }
+}
+```
 
-## Current Status
+When doing integration tests it's possible to tell the `bootstrap`-script to download WordPress and to install it.
 
-This framework [has been ported](http://unit-test.trac.wordpress.org/ticket/42) to the official testing suite.
+## Acceptance tests
+The `AcceptanceTestCase` class allows you to test the output of your site.
 
-To get involved with WordPress testing, see http://unit-test.trac.wordpress.org/
+```php
+class WikipediaSearchTest extends AcceptanceTestCase
+{
+    public function testWithoutJavascript()
+    {
+        $this->visit('http://en.wikipedia.org/wiki/Main_Page');
+        $this->assertStatusCodeEquals(200);
+
+        $this->fillIn('search', 'Stockholm');
+        $this->clickOn('searchButton');
+        $this->assertStatusCodeEquals(200);
+        $this->assertPageHasContent('Stockholm');
+
+        $this->clickLink('Main page');
+        $this->assertStatusCodeEquals(200);
+    }
+}
+```
+
+
