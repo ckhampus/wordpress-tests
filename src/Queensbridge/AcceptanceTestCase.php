@@ -2,7 +2,9 @@
 
 namespace Queensbridge;
 
-use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Driver\ZombieDriver;
+use Behat\Mink\Driver\NodeJS\Server\ZombieServer;
+use Behat\Mink\Driver\GoutteDriver;
 use Behat\Mink\Mink;
 use Behat\Mink\Session;
 use Behat\Mink\Selector\NamedSelector;
@@ -15,19 +17,25 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        $driver = new Selenium2Driver('firefox', 'base_url');
+        //$driver = new Selenium2Driver('firefox', 'base_url');
+        //$server = new ZombieServer('127.0.0.1', '1337');
+        //$driver = new ZombieDriver($server);
 
         $handler  = new SelectorsHandler(array(
             'named' => new NamedSelector(),
             'css' => new CssSelector()
         ));
 
-        $session = new Session($driver, $handler);
-        $session->start();
+        $goutte = new GoutteDriver();
+        $noJsSession = new Session($goutte, $handler);
+
+        $zombie = new ZombieDriver(new ZombieServer());
+        $jsSession = new Session($zombie, $handler);
 
         self::$mink = new Mink();
-        self::$mink->registerSession('selenium', $session);
-        self::$mink->setDefaultSessionName('selenium');
+        self::$mink->registerSession('nojs', $noJsSession);
+        self::$mink->registerSession('js', $jsSession);
+        self::$mink->setDefaultSessionName('nojs');
     }
 
     public function setUp()
@@ -43,6 +51,11 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
     public static function tearDownAfterClass()
     {
         self::$mink->restartSessions();
+    }
+
+    public function enableJavascript()
+    {
+        self::$mink->setDefaultSessionName('js');
     }
 
     public function getSession()
@@ -70,7 +83,7 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function clickButton($button)
     {
-        $el->$this->getPage()->findButton($button);
+        $el = $this->getPage()->findButton($button);
         $el->click();
 
         return $el;
@@ -78,10 +91,7 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function clickOn($linkOrButton)
     {
-        $el = $this->getPage()->find('named',
-            array('link_or_button', $linkOrButton)
-        );
-
+        $el = $this->getPage()->find('named', array('link_or_button', $linkOrButton));
         $el->click();
 
         return $el;
@@ -125,5 +135,10 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
     public function select($option, $selectBox)
     {
         $this->getPage()->findField($selectBox)->selectOption($option);
+    }
+
+    public function assertStatusCodeEquals($code)
+    {
+        $this->assertEquals($code, $this->getSession()->getStatusCode());
     }
 }
