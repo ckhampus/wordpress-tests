@@ -4,3 +4,4 @@ vendor
 composer.phar
 bin/behat*
 bin/php-cs-fixer
+tests/wordpress

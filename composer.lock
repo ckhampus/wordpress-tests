@@ -1,5 +1,5 @@
 {
-    "hash": "77e8f0292fb93f05c9e8db61a26d0e10",
+    "hash": "38ad7595c60fbd142a8302c1d7f58f67",
     "packages": [
         {
             "name": "behat/behat",
@@ -225,6 +225,103 @@
             ]
         },
         {
+            "name": "behat/mink-selenium2-driver",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/Behat/MinkSelenium2Driver.git",
+                "reference": "v1.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Behat/MinkSelenium2Driver/zipball/v1.0.2",
+                "reference": "v1.0.2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "behat/mink": ">=1.4.0,<1.5.0",
+                "instaclick/php-webdriver": "@dev"
+            },
+            "time": "2012-07-05 08:32:03",
+            "type": "mink-driver",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Mink\\Driver": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Selenium2 (WebDriver) driver for Mink framework",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "javascript",
+                "testing",
+                "browser",
+                "ajax",
+                "selenium",
+                "webdriver"
+            ]
+        },
+        {
+            "name": "instaclick/php-webdriver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/instaclick/php-webdriver",
+                "reference": "v1.0.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/instaclick/php-webdriver/zipball/v1.0.6",
+                "reference": "v1.0.6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "time": "1345642676",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "WebDriver": "lib/"
+                }
+            },
+            "license": [
+                "Apache"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Bishop",
+                    "email": "jubishop@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anthon Pang",
+                    "email": "anthonp@nationalfibre.net",
+                    "role": "Fork Maintainer"
+                }
+            ],
+            "description": "PHP WebDriver for Selenium 2",
+            "homepage": "http://instaclick.com/torontotechjobs/",
+            "keywords": [
+                "browser",
+                "selenium",
+                "webdriver",
+                "webtest"
+            ]
+        },
+        {
             "name": "symfony/config",
             "version": "2.1.x-dev",
             "target-dir": "Symfony/Component/Config",
@@ -372,12 +469,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DependencyInjection",
-                "reference": "6d97523228158d5b75ea2fc18ff88ea39f818a18"
+                "reference": "cb04ee0298826a086ab6fd007b2785191958df9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/DependencyInjection/zipball/6d97523228158d5b75ea2fc18ff88ea39f818a18",
-                "reference": "6d97523228158d5b75ea2fc18ff88ea39f818a18",
+                "url": "https://github.com/symfony/DependencyInjection/zipball/cb04ee0298826a086ab6fd007b2785191958df9b",
+                "reference": "cb04ee0298826a086ab6fd007b2785191958df9b",
                 "shasum": ""
             },
             "require": {
@@ -391,7 +488,7 @@
                 "symfony/yaml": "2.1.*",
                 "symfony/config": "2.1.*"
             },
-            "time": "1347521041",
+            "time": "1347914517",
             "type": "library",
             "extra": {
                 "branch-alias": {

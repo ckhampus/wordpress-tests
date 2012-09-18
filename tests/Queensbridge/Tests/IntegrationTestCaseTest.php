@@ -22,4 +22,20 @@ class IntegrationTestCaseTest extends IntegrationTestCase
         $this->visit(admin_url());
         $this->assertTrue(is_admin(), 'This is not an admin page.');
     }
+
+    function testIsEmailOnlyLettersWithDotComDomain() {
+        $this->assertEquals( 'nb@nikolay.com', is_email( 'nb@nikolay.com' ) );
+    }
+
+    function testIsEmailShouldNotAllowMissingTld() {
+        $this->assertFalse( is_email( 'nb@nikolay' ) );
+    }
+
+    function testIsEmailShouldAllowBgDomain() {
+        $this->assertEquals( 'nb@nikolay.bg', is_email( 'nb@nikolay.bg' ) );
+    }
+
+    function testIsEmailShouldNotAllowBlahDomain() {
+        $this->assertFalse( is_email( 'nb@nikolay.blah' ) );
+    }
 }
