@@ -15,62 +15,44 @@ use Behat\Mink\Session;
  */
 abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 {
-    protected static $mink;
+    protected $mink = null;
 
-    protected $baseUrl;
+    protected $baseUrl = null;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function setUpBeforeClass()
+    public function setUpSessions()
     {
-        $handler  = new SelectorsHandler(array(
-            'named' => new NamedSelector(),
-            'css' => new CssSelector()
-        ));
+        if ($this->mink === null) {
+            $handler  = new SelectorsHandler(array(
+                'named' => new NamedSelector(),
+                'css' => new CssSelector()
+            ));
 
-        $goutte = new GoutteDriver();
-        $noJsSession = new Session($goutte, $handler);
+            $goutte = new GoutteDriver();
+            $noJsSession = new Session($goutte, $handler);
 
-        $selenium = new Selenium2Driver('firefox');
-        $jsSession = new Session($selenium, $handler);
+            $selenium = new Selenium2Driver('firefox');
+            $jsSession = new Session($selenium, $handler);
 
-        self::$mink = new Mink();
-        self::$mink->registerSession('nojs', $noJsSession);
-        self::$mink->registerSession('js', $jsSession);
-        self::$mink->setDefaultSessionName('nojs');
-    }
+            $this->mink = new Mink();
+            $this->mink->registerSession('nojs', $noJsSession);
+            $this->mink->registerSession('js', $jsSession);
+            $this->mink->setDefaultSessionName('nojs');
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
-    {
         $annotations = $this->getAnnotations();
 
         if (!empty($annotations['method'])) {
             if (array_key_exists('javascript', $annotations['method'])) {
-                self::$mink->setDefaultSessionName('js');
+                $this->mink->setDefaultSessionName('js');
             }
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function tearDown()
+    public function tearDownSessions($value='')
     {
-        self::$mink->setDefaultSessionName('nojs');
-        self::$mink->resetSessions();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function tearDownAfterClass()
-    {
-        if (null !== self::$mink) {
-            self::$mink->stopSessions();
+        if (null !== $this->mink) {
+            $this->mink->setDefaultSessionName('nojs');
+            $this->mink->stopSessions();
         }
     }
 
@@ -80,22 +62,23 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
      */
     public function getSession()
     {
-        return self::$mink->getSession();
+        return $this->mink->getSession();
     }
 
     public function getMink()
     {
-        if (null === self::$mink) {
+        if (null === $this->mink) {
             throw new \RuntimeException(
                 'Mink is not initialized. Forgot to call parent context setUpBeforeClass()?'
             );
         }
 
-        return self::$mink;
+        return $this->mink;
     }
 
     /**
      * Set the base url.
+     *
      * @param string $url The base url.
      */
     public function setBaseUrl($url)
@@ -110,53 +93,101 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
      */
     public function visit($url)
     {
+        if ($this->baseUrl !== null) {
+            $url = $baseUrl.$url;
+        }
+
         $this->getSession()->visit($url);
     }
 
-    public function clickLink($link)
+    /**
+     * Finds a link by id or text and clicks it.
+     *
+     * @param string $locator Text, id or text of link.
+     */
+    public function clickLink($locator)
     {
-        $el = $this->findLink($link);
+        $el = $this->findLink($locator);
         $el->click();
     }
 
-    public function clickButton($button)
+    /**
+     * Finds a button by id, text or value and clicks it.
+     *
+     * @param string $locator Text, id or value of button.
+     */
+    public function clickButton($locator)
     {
-        $el = $this->findButton($button);
+        $el = $this->findButton($locator);
         $el->click();
     }
 
-    public function fillIn($field, $value)
+    /**
+     * Locate a text field or text area and fill it in with the given
+     * text The field can be found via its name, id or label text.
+     *
+     * @param string $locator Which field to fill in.
+     * @param string $value   Value to fill in.
+     */
+    public function fillIn($locator, $value)
     {
-        $el = $this->findField($field);
+        $el = $this->findField($locator);
         $el->setValue($value);
     }
 
-    public function choose($name)
+    /**
+     * Find a radio button and mark it as checked. The radio button
+     * can be found via name, id or label text.
+     *
+     * @param string $name Which radio button to choose.
+     */
+    public function choose($locator)
     {
 
     }
 
-    public function check($checkbox)
+    /**
+     * Find a check box and mark it as checked. The check box can be found
+     * via name, id or label text.
+     *
+     * @param string $locator Which check box to check.
+     */
+    public function check($locator)
     {
-        $el = $this->findField($checkbox);
+        $el = $this->findField($locator);
 
         if (!$el->isChecked()) {
             $el->check();
         }
     }
 
-    public function uncheck($checkbox)
+    /**
+     * Find a check box and mark uncheck it. The check box can be found
+     * via name, id or label text.
+     *
+     * @param string $locator Which check box to uncheck.
+     */
+    public function uncheck($locator)
     {
-        $el = $this->findField($checkbox);
+        $el = $this->findField($locator);
 
         if ($el->isChecked()) {
             $el->uncheck();
         }
     }
 
-    public function select($option, $selectBox)
+    /**
+     * Find a select box on the page and select a particular option from it.
+     * If the select box is a multiple select, select can be called multiple
+     * times to select more than one option. The select box can be found
+     * via its name, id or label text.
+     *
+     * @param string $option  Which option to select.
+     * @param string $locator Id, name or label of the select box
+     */
+    public function select($option, $locator)
     {
-        $this->findField($selectBox)->selectOption($option);
+        $this->findField($locator)->selectOption($option);
     }
 
     public function find($handler, $value)
@@ -164,25 +195,54 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         return $this->getPage()->find($handler, $value);
     }
 
-    public function findLink($link)
+    /**
+     * Find a link on the page. The link can be found by its id or text.
+     *
+     * @param  string                         $locator Which link to find.
+     * @return Behat\Mink\Element\NodeElement The found element.
+     */
+    public function findLink($locator)
     {
-        return $this->getPage()->findLink($link);
+        return $this->getPage()->findLink($locator);
     }
 
-    public function findButton($button)
+    /**
+     * Find a button on the page. The button can be found by its id, name or value
+     *
+     * @param  string                         $locator Which button to find.
+     * @return Behat\Mink\Element\NodeElement The found element.
+     */
+    public function findButton($locator)
     {
-        return $this->getPage()->findButton($button);
+        return $this->getPage()->findButton($locator);
     }
 
-    public function findField($field)
+    /**
+     * Find a form field on the page. The field can be found by its name, id or label text.
+     *
+     * @param  string                         $locator Which field to find.
+     * @return Behat\Mink\Element\NodeElement The found element.
+     */
+    public function findField($locator)
     {
-        return $this->getPage()->findField($field);
+        return $this->getPage()->findField($locator);
+    }
+
+    public function run(\PHPUnit_Framework_TestResult $result = NULL)
+    {
+        $this->setUpSessions();
+
+        parent::run($result);
+
+        $this->tearDownSessions();
+
+        return $result;
     }
 
     public function __call($method, $args)
     {
         if (strpos($method, 'assert') === 0) {
-            $asserter = self::$mink->assertSession();
+            $asserter = $this->mink->assertSession();
 
             $method = str_replace('assert', '', $method);
             $method = lcfirst($method);
@@ -207,11 +267,12 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
             if ($object->hasMethod($method)) {
                 $objectMethod = $object->getMethod($method);
+
                 return $objectMethod->invokeArgs($session, $args);
             }
         }
 
         throw new \BadMethodCallException("Call to a member function {$method} on a non-object");
-        
+
     }
 }
