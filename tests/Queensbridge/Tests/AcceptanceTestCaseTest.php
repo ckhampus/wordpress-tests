@@ -6,20 +6,40 @@ use Queensbridge\AcceptanceTestCase;
 
 class AcceptanceTestCaseTest extends AcceptanceTestCase
 {
+    /**
+     * @expectedException BadMethodCallException
+     */
+    public function testBadMethodCall()
+    {
+        $this->nonExistentMethod();
+    }
+
+    public function testFailingAssertions()
+    {
+        try {  
+            $this->visit('http://en.wikipedia.org/wiki/Main_Page'); 
+            $this->assertResponseContains('This string should not exist');
+        } catch (\PHPUnit_Framework_ExpectationFailedException $ex) {  
+          // As expected the assertion failed, silently return  
+          return;  
+        }  
+        // The assertion did not fail, make the test fail  
+        $this->fail('This test did not fail as expected'); 
+    }
+
+    /**
+     * @javascript
+     */
     public function testWithJavascript()
     {
-        $this->enableJavascript();
-
         $this->visit('http://en.wikipedia.org/wiki/Main_Page');
-        $this->assertStatusCodeEquals(200);
 
         $this->fillIn('search', 'Stockholm');
         $this->clickButton('searchButton');
-        $this->assertStatusCodeEquals(200);
-        $this->assertPageHasSelector('#firstHeading');
+        $this->assertElementExists('css','#firstHeading');
+        $this->assertResponseContains('Stockholm');
 
         $this->clickLink('Main page');
-        $this->assertStatusCodeEquals(200);
     }
 
     public function testWithoutJavascript()
@@ -28,9 +48,10 @@ class AcceptanceTestCaseTest extends AcceptanceTestCase
         $this->assertStatusCodeEquals(200);
 
         $this->fillIn('search', 'Stockholm');
-        $this->clickOn('searchButton');
+        $this->clickButton('searchButton');
         $this->assertStatusCodeEquals(200);
-        $this->assertPageHasContent('Stockholm');
+        $this->assertElementExists('css','#firstHeading');
+        $this->assertResponseContains('Stockholm');
 
         $this->clickLink('Main page');
         $this->assertStatusCodeEquals(200);

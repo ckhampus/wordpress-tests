@@ -2,15 +2,14 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-use Queensbridge\Console\Downloader;
 use Queensbridge\Console\Installer;
 
 /* Path to the WordPress codebase you'd like to test. Add a backslash in the end. */
-define('ABSPATH', __DIR__.'/wordpress/');
+define('ABSPATH', __DIR__.'/../vendor/wordpress/wordpress/');
 
 define('DB_NAME', 'wordpress_test');
-define('DB_USER', 'wptest');
-define('DB_PASSWORD', 'wptest');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
@@ -57,10 +56,6 @@ global $table_prefix, $wp_embed, $wp_locale, $_wp_deprecated_widgets_callbacks, 
 
 // These are still needed
 global $wpdb, $current_site, $current_blog, $wp_rewrite, $shortcode_tags, $wp;
-
-$downloader = new Downloader(ABSPATH);
-$downloader->fetch('https://github.com/WordPress/WordPress.git');
-$downloader->branch('3.4.2');
 
 $installer = new Installer();
 $installer->install();

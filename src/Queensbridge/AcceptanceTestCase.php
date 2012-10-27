@@ -2,21 +2,26 @@
 
 namespace Queensbridge;
 
-use Behat\Mink\Driver\ZombieDriver;
-use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Mink\Driver\NodeJS\Server\ZombieServer;
 use Behat\Mink\Driver\GoutteDriver;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Mink;
-use Behat\Mink\Session;
-use Behat\Mink\Selector\NamedSelector;
 use Behat\Mink\Selector\CssSelector;
+use Behat\Mink\Selector\NamedSelector;
 use Behat\Mink\Selector\SelectorsHandler;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
+use Behat\Mink\Session;
 
-class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
+/**
+ * Test case for testing WordPress site in real browsers.
+ */
+abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 {
-    private static $mink;
+    protected static $mink;
 
+    protected $baseUrl;
+
+    /**
+     * {@inheritdoc}
+     */
     public static function setUpBeforeClass()
     {
         $handler  = new SelectorsHandler(array(
@@ -27,7 +32,6 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         $goutte = new GoutteDriver();
         $noJsSession = new Session($goutte, $handler);
 
-        //$zombie = new ZombieDriver(new ZombieServer());
         $selenium = new Selenium2Driver('firefox');
         $jsSession = new Session($selenium, $handler);
 
@@ -37,72 +41,94 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         self::$mink->setDefaultSessionName('nojs');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setUp()
     {
+        $annotations = $this->getAnnotations();
 
+        if (!empty($annotations['method'])) {
+            if (array_key_exists('javascript', $annotations['method'])) {
+                self::$mink->setDefaultSessionName('js');
+            }
+        }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function tearDown()
     {
         self::$mink->setDefaultSessionName('nojs');
         self::$mink->resetSessions();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function tearDownAfterClass()
     {
-        self::$mink->restartSessions();
+        if (null !== self::$mink) {
+            self::$mink->stopSessions();
+        }
     }
 
-    public function enableJavascript()
-    {
-        self::$mink->setDefaultSessionName('js');
-    }
-
+    /**
+     * Returns the currently active session.
+     * @return Behat\Mink\Session The session.
+     */
     public function getSession()
     {
         return self::$mink->getSession();
     }
 
-    public function visit($url)
+    public function getMink()
     {
-        return $this->getSession()->visit($url);
+        if (null === self::$mink) {
+            throw new \RuntimeException(
+                'Mink is not initialized. Forgot to call parent context setUpBeforeClass()?'
+            );
+        }
+
+        return self::$mink;
     }
 
-    public function getPage()
+    /**
+     * Set the base url.
+     * @param string $url The base url.
+     */
+    public function setBaseUrl($url)
     {
-        return $this->getSession()->getPage();
+        $this->baseUrl = $url;
+    }
+
+    /**
+     * Visit specified URL.
+     *
+     * @param string $url URL of the page.
+     */
+    public function visit($url)
+    {
+        $this->getSession()->visit($url);
     }
 
     public function clickLink($link)
     {
         $el = $this->findLink($link);
         $el->click();
-
-        return $el;
     }
 
     public function clickButton($button)
     {
         $el = $this->findButton($button);
         $el->click();
-
-        return $el;
-    }
-
-    public function clickOn($linkOrButton)
-    {
-        $el = $this->find('named', array('link_or_button', $linkOrButton));
-        $el->click();
-
-        return $el;
     }
 
     public function fillIn($field, $value)
     {
         $el = $this->findField($field);
         $el->setValue($value);
-
-        return $el;
     }
 
     public function choose($name)
@@ -117,8 +143,6 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         if (!$el->isChecked()) {
             $el->check();
         }
-
-        return $el;
     }
 
     public function uncheck($checkbox)
@@ -128,8 +152,6 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         if ($el->isChecked()) {
             $el->uncheck();
         }
-
-        return $el;
     }
 
     public function select($option, $selectBox)
@@ -157,22 +179,39 @@ class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         return $this->getPage()->findField($field);
     }
 
-    public function assertStatusCodeEquals($code)
+    public function __call($method, $args)
     {
-        try {
-            $this->assertEquals($code, $this->getSession()->getStatusCode());
-        } catch (UnsupportedDriverActionException $e) { }
-    }
+        if (strpos($method, 'assert') === 0) {
+            $asserter = self::$mink->assertSession();
 
-    public function assertPageHasContent($content)
-    {
-        $el = $this->find('named', array('content', $content));
-        $this->assertNotNull($el);
-    }
+            $method = str_replace('assert', '', $method);
+            $method = lcfirst($method);
 
-    public function assertPageHasSelector($selector)
-    {
-        $el = $this->find('css', $selector);
-        $this->assertNotNull($el);
+            $object = new \ReflectionObject($asserter);
+
+            if ($object->hasMethod($method)) {
+                try {
+                    $objectMethod = $object->getMethod($method);
+                    $objectMethod->invokeArgs($asserter, $args);
+                    $this->assertTrue(true);
+                } catch (\Exception $e) {
+                    $this->assertTrue(false, $e->getMessage());
+                }
+
+                return;
+            }
+        } else {
+            $session = $this->getSession();
+
+            $object = new \ReflectionObject($session);
+
+            if ($object->hasMethod($method)) {
+                $objectMethod = $object->getMethod($method);
+                return $objectMethod->invokeArgs($session, $args);
+            }
+        }
+
+        throw new \BadMethodCallException("Call to a member function {$method} on a non-object");
+        
     }
 }
