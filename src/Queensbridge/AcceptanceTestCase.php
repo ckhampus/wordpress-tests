@@ -19,6 +19,9 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     protected $baseUrl = null;
 
+    /**
+     * Set up two Mink sessions.
+     */
     public function setUpSessions()
     {
         if ($this->mink === null) {
@@ -48,7 +51,10 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function tearDownSessions($value='')
+    /**
+     * Set back to default session and stop all sessions.
+     */
+    public function tearDownSessions()
     {
         if (null !== $this->mink) {
             $this->mink->setDefaultSessionName('nojs');
@@ -58,6 +64,7 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     /**
      * Returns the currently active session.
+     *
      * @return Behat\Mink\Session The session.
      */
     public function getSession()
@@ -94,7 +101,7 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
     public function visit($url)
     {
         if ($this->baseUrl !== null) {
-            $url = $baseUrl.$url;
+            $url = $this->baseUrl.$url;
         }
 
         $this->getSession()->visit($url);
@@ -273,6 +280,5 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         }
 
         throw new \BadMethodCallException("Call to a member function {$method} on a non-object");
-
     }
 }

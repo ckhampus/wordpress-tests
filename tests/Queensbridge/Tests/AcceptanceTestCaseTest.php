@@ -6,23 +6,6 @@ use Queensbridge\AcceptanceTestCase;
 
 class AcceptanceTestCaseTest extends AcceptanceTestCase
 {
-
-    /**
-     * @expectedException RuntimeException
-     */
-    public function testAcceptanceTestCaseException()
-    {
-        $testCase = $this->getMockForAbstractClass('\Queensbridge\AcceptanceTestCase');
-        $testCase->getMink();
-    }
-
-    public function testAcceptanceTestCaseSetUp()
-    {
-        $testCase = $this->getMockForAbstractClass('\Queensbridge\AcceptanceTestCase');
-        $testCase->setUpSessions();
-        $this->assertNotNull($testCase->getMink());
-    }
-
     /**
      * @expectedException BadMethodCallException
      */
@@ -33,15 +16,15 @@ class AcceptanceTestCaseTest extends AcceptanceTestCase
 
     public function testFailingAssertions()
     {
-        try {  
-            $this->visit('http://en.wikipedia.org/wiki/Main_Page'); 
+        try {
+            $this->visit('http://en.wikipedia.org/wiki/Main_Page');
             $this->assertResponseContains('This string should not exist');
-        } catch (\PHPUnit_Framework_ExpectationFailedException $ex) {  
-          // As expected the assertion failed, silently return  
-          return;  
-        }  
-        // The assertion did not fail, make the test fail  
-        $this->fail('This test did not fail as expected'); 
+        } catch (\PHPUnit_Framework_ExpectationFailedException $ex) {
+          // As expected the assertion failed, silently return
+          return;
+        }
+        // The assertion did not fail, make the test fail
+        $this->fail('This test did not fail as expected');
     }
 
     /**
@@ -52,7 +35,8 @@ class AcceptanceTestCaseTest extends AcceptanceTestCase
         $this->visit('http://en.wikipedia.org/wiki/Main_Page');
 
         $this->fillIn('search', 'Stockholm');
-        $this->clickButton('searchButton');
+        $this->wait(2000, "$('.suggestions:visible').length > 0");
+        $this->find('css', '.suggestions-result:first-child')->click();
         $this->assertElementExists('css','#firstHeading');
         $this->assertResponseContains('Stockholm');
 
@@ -61,7 +45,8 @@ class AcceptanceTestCaseTest extends AcceptanceTestCase
 
     public function testWithoutJavascript()
     {
-        $this->visit('http://en.wikipedia.org/wiki/Main_Page');
+        $this->setBaseUrl('http://en.wikipedia.org');
+        $this->visit('/wiki/Main_Page');
         $this->assertStatusCodeEquals(200);
 
         $this->fillIn('search', 'Stockholm');
