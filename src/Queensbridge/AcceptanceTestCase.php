@@ -22,7 +22,7 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
     /**
      * Set up two Mink sessions.
      */
-    public function setUpSessions()
+    public function prepareSessions()
     {
         if ($this->mink === null) {
             $handler  = new SelectorsHandler(array(
@@ -54,7 +54,7 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
     /**
      * Set back to default session and stop all sessions.
      */
-    public function tearDownSessions()
+    public function resetSessions()
     {
         if (null !== $this->mink) {
             $this->mink->setDefaultSessionName('nojs');
@@ -69,7 +69,7 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
      */
     public function getSession()
     {
-        return $this->mink->getSession();
+        return $this->getMink()->getSession();
     }
 
     public function getMink()
@@ -235,13 +235,13 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         return $this->getPage()->findField($locator);
     }
 
-    public function run(\PHPUnit_Framework_TestResult $result = NULL)
+    public function runTest()
     {
-        $this->setUpSessions();
+        $this->prepareSessions();
 
-        parent::run($result);
+        $result = parent::runTest();
 
-        $this->tearDownSessions();
+        $this->resetSessions();
 
         return $result;
     }
@@ -249,7 +249,34 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
     public function __call($method, $args)
     {
         if (strpos($method, 'assert') === 0) {
-            $asserter = $this->mink->assertSession();
+            $realMethod = lcfirst(substr($method, strlen('assert')));
+
+            $asserter = $this->getMink()->assertSession();
+            $asserterObject = new \ReflectionObject($asserter);
+
+            if ($asserterObject->hasMethod($realMethod)) {
+                try {
+                    $objectMethod = $asserterObject->getMethod($realMethod);
+                    $objectMethod->invokeArgs($asserter, $args);
+                    $this->assertTrue(true);
+                    return;
+                } catch (\Exception $e) {
+                    $this->assertTrue(false, $e->getMessage());
+                }
+            }
+        }
+
+        $session = $this->getSession();
+        $sessionObject = new \ReflectionObject($session);
+
+        if ($sessionObject->hasMethod($method)) {
+            $objectMethod = $sessionObject->getMethod($method);
+            return $objectMethod->invokeArgs($session, $args);
+        }
+
+        /*
+        if (strpos($method, 'assert') === 0) {
+            $asserter = $this->getMink()->assertSession();
 
             $method = str_replace('assert', '', $method);
             $method = lcfirst($method);
@@ -278,7 +305,8 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
                 return $objectMethod->invokeArgs($session, $args);
             }
         }
+         */
 
-        throw new \BadMethodCallException("Call to a member function {$method} on a non-object");
+        throw new \BadMethodCallException("Call to undefined method ".__CLASS__."::{$method}()");
     }
 }

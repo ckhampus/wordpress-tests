@@ -6,6 +6,10 @@ use Queensbridge\IntegrationTestCase;
 
 class IntegrationTestCaseTest extends IntegrationTestCase
 {
+
+    /**
+     * @covers Queensbridge\IntegrationTestCase
+     */
     public function testSingle()
     {
         $this->visit(get_permalink(1));
