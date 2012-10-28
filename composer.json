@@ -9,19 +9,20 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "symfony/http-foundation": "v2.1.1",
-        "symfony/process": "v2.1.1",
-        "symfony/filesystem": "v2.1.1",
-        "symfony/finder": "v2.1.1",
-        "symfony/yaml": "v2.1.1",
-        "behat/mink": "v1.4.0",
-        "behat/mink-zombie-driver": "*",
+        "symfony/http-foundation": "2.1.1",
+        "symfony/process": "2.1.1",
+        "symfony/filesystem": "2.1.1",
+        "symfony/finder": "2.1.1",
+        "symfony/yaml": "2.1.1",
+        "behat/mink": "*",
         "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*",
-        "behat/mink-sahi-driver": "*"
+        "behat/mink-selenium2-driver": "*"
     },
     "require-dev": {
-        "fabpot/php-cs-fixer": "dev-master"
+        "selenium/selenium-server-standalone": "2.25.0",
+        "wordpress/wordpress": "3.4.2",
+        "phpunit/phpunit": "3.7.8",
+        "fabpot/php-cs-fixer": "*"
     },
     "minimum-stability": "dev",
     "autoload": {
@@ -31,5 +32,11 @@
     },
     "config": {
         "bin-dir": "bin/"
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://ckhampus.github.com/composer-repository"
+        }
+    ]
 }

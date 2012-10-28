@@ -19,23 +19,39 @@ class SinglePageTest extends IntegrationTestCase
 }
 ```
 
-When doing integration tests it's possible to tell the `bootstrap`-script to download WordPress and to install it.
-
 ## Acceptance tests
-The `AcceptanceTestCase` class allows you to test the output of your site.
+The `AcceptanceTestCase` class uses Mink and allows you to test the output of your site. Depending if you require JavaScript for your test or not, this test case will either use Selenium 2 or Goutte as drivers.
 
 ```php
 class WikipediaSearchTest extends AcceptanceTestCase
 {
-    public function testWithoutJavascript()
+    /**
+     * @javascript
+     */
+    public function testWithJavascript()
     {
         $this->visit('http://en.wikipedia.org/wiki/Main_Page');
+
+        $this->fillIn('search', 'Stockholm');
+        $this->wait(2000, "$('.suggestions:visible').length > 0");
+        $this->find('css', '.suggestions-result:first-child')->click();
+        $this->assertElementExists('css','#firstHeading');
+        $this->assertResponseContains('Stockholm');
+
+        $this->clickLink('Main page');
+    }
+
+    public function testWithoutJavascript()
+    {
+        $this->setBaseUrl('http://en.wikipedia.org');
+        $this->visit('/wiki/Main_Page');
         $this->assertStatusCodeEquals(200);
 
         $this->fillIn('search', 'Stockholm');
-        $this->clickOn('searchButton');
+        $this->clickButton('searchButton');
         $this->assertStatusCodeEquals(200);
-        $this->assertPageHasContent('Stockholm');
+        $this->assertElementExists('css','#firstHeading');
+        $this->assertResponseContains('Stockholm');
 
         $this->clickLink('Main page');
         $this->assertStatusCodeEquals(200);

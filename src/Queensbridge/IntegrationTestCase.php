@@ -4,26 +4,38 @@ namespace Queensbridge;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class IntegrationTestCase extends \PHPUnit_Framework_TestCase
+abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
 {
-    public function setUp()
+    private $backup = array();
+
+    protected function prepareEnvironment()
     {
-        global $wpdb;
-        $wpdb->suppress_errors = false;
-        $wpdb->show_errors = true;
-        $wpdb->db_connect();
+        $this->backup['_SERVER'] = $_SERVER;
+
+        $GLOBALS['wpdb']->suppress_errors = false;
+        $GLOBALS['wpdb']->show_errors = true;
+        $GLOBALS['wpdb']->db_connect();
+
         ini_set('display_errors', 1);
+
         $this->clearGlobals();
         $this->startTransaction();
     }
 
-    public function tearDown()
+    /**
+     * Rollback back database.
+     */
+    protected function resetEnvironment()
     {
-        global $wpdb;
-        $wpdb->query('ROLLBACK');
+        $GLOBALS['wpdb']->query('ROLLBACK');
+
+        $_SERVER = $this->backup['_SERVER'];
     }
 
-    public function clearGlobals()
+    /**
+     * Clear all global variables and flush cache.
+     */
+    protected function clearGlobals()
     {
         $_GET = array();
         $_POST = array();
@@ -35,30 +47,34 @@ class IntegrationTestCase extends \PHPUnit_Framework_TestCase
         $this->flushCache();
     }
 
-    public function flushCache()
+    /**
+     * Flush WordPress object cache.
+     */
+    protected function flushCache()
     {
-        global $wp_object_cache;
-        $wp_object_cache->group_ops = array();
-        $wp_object_cache->stats = array();
-        $wp_object_cache->memcache_debug = array();
-        $wp_object_cache->cache = array();
+        $GLOBALS['wp_object_cache']->group_ops = array();
+        $GLOBALS['wp_object_cache']->stats = array();
+        $GLOBALS['wp_object_cache']->memcache_debug = array();
+        $GLOBALS['wp_object_cache']->cache = array();
 
-        if (method_exists($wp_object_cache, '__remoteset')) {
-            $wp_object_cache->__remoteset();
+        if (method_exists($GLOBALS['wp_object_cache'], '__remoteset')) {
+            $GLOBALS['wp_object_cache']->__remoteset();
         }
         wp_cache_flush();
     }
 
-    public function startTransaction()
+    /**
+     * Start database transaction.
+     */
+    protected function startTransaction()
     {
-        global $wpdb;
-        $wpdb->query('SET autocommit = 0;');
-        $wpdb->query('START TRANSACTION;');
+        $GLOBALS['wpdb']->query('SET autocommit = 0;');
+        $GLOBALS['wpdb']->query('START TRANSACTION;');
     }
 
     public function assertWPError( $actual, $message = '' )
     {
-        $this->assertTrue( is_wp_error( $actual ), $message );
+        $this->assertTrue(is_wp_error( $actual ), $message);
     }
 
     public function visit($url)
@@ -142,5 +158,16 @@ class IntegrationTestCase extends \PHPUnit_Framework_TestCase
         }
 
         do_action('admin_init');
+    }
+
+    public function runTest()
+    {
+        $this->prepareEnvironment();
+
+        $result = parent::runTest();
+
+        $this->resetEnvironment();
+
+        return $result;
     }
 }
