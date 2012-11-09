@@ -8,7 +8,9 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0",
+        "php": ">=5.3",
+        "selenium/selenium-server-standalone": "2.25.0",
+        "phpunit/phpunit": "3.7.8",
         "symfony/http-foundation": "2.1.1",
         "symfony/process": "2.1.1",
         "symfony/filesystem": "2.1.1",
@@ -19,9 +21,7 @@
         "behat/mink-selenium2-driver": "*"
     },
     "require-dev": {
-        "selenium/selenium-server-standalone": "2.25.0",
         "wordpress/wordpress": "3.4.2",
-        "phpunit/phpunit": "3.7.8",
         "fabpot/php-cs-fixer": "*"
     },
     "minimum-stability": "dev",
@@ -36,7 +36,7 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "http://ckhampus.github.com/composer-repository"
+            "url": "http://packages.cristianhampus.se"
         }
     ]
 }
