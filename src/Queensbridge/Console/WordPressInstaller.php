@@ -4,19 +4,13 @@ namespace Queensbridge\Console;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class Installer
+class WordPressInstaller
 {
-    private $config;
-
-    public function __contruct()
-    {
-        $this->config = $config;
-    }
-
+    /**
+     * Install WordPress.
+     */
     public function install()
     {
-        $config = $this->config;
-
         define('WP_INSTALLING', true);
 
         // Set table prefix globally.
@@ -46,6 +40,7 @@ class Installer
                 return;
             }
         }
+
         $wpdb->query('SET storage_engine = INNODB;');
         $wpdb->query('DROP DATABASE IF EXISTS '.DB_NAME.";");
         $wpdb->query('CREATE DATABASE '.DB_NAME.";");
@@ -61,12 +56,14 @@ class Installer
         file_put_contents(WP_TESTS_VERSION_FILE, $this->testVersionCheckHash());
     }
 
+    /**
+     * Install WordPress in multi site mode.
+     */
     public function installMultiSite()
     {
         echo "Installing WordPress Network" .PHP_EOL;
 
         define( 'WP_INSTALLING_NETWORK', true );
-        //wp_set_wpdb_vars();
         // We need to create references to ms global tables to enable Network.
         foreach ($wpdb->tables( 'ms_global' ) as $table => $prefixed_table) {
             $wpdb->$table = $prefixed_table;
@@ -75,11 +72,6 @@ class Installer
         install_network();
 
         $result = populate_network(1, WP_TESTS_DOMAIN, WP_TESTS_EMAIL, WP_TESTS_NETWORK_TITLE, '/', WP_TESTS_SUBDOMAIN_INSTALL);
-
-        //require_once ABSPATH . '/wp-settings.php';
-
-        //require_once ABSPATH . '/wp-admin/includes/upgrade.php';
-        //require_once ABSPATH . '/wp-includes/wp-db.php';
 
         echo "Installing Network Sites" . PHP_EOL;
         wp_install( WP_TESTS_TITLE, WP_TESTS_ADMIN, WP_TESTS_EMAIL, true, '', 'a' );
@@ -103,6 +95,7 @@ class Installer
     /**
      * Generate a hash to be used when comparing installed version against
      * codebase and current configuration
+     *
      * @return string $hash sha1 hash
      */
     public function testVersionCheckHash()

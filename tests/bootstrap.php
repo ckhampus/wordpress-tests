@@ -2,14 +2,12 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-use Queensbridge\Console\Installer;
-
 /* Path to the WordPress codebase you'd like to test. Add a backslash in the end. */
 define('ABSPATH', __DIR__.'/../vendor/wordpress/wordpress/');
 
 define('DB_NAME', 'wordpress_test');
 define('DB_USER', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'qb123');
 define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
@@ -46,16 +44,8 @@ if (WP_ALLOW_MULTISITE && !defined('WP_INSTALLING')) {
     define( 'WPMU_PLUGIN_DIR', __DIR__ . '/mu-plugins' );
 }
 
-/*
- * Globalize some WordPress variables, because PHPUnit loads this file inside a function
- * See: https://github.com/sebastianbergmann/phpunit/issues/325
- *
- * These are not needed for WordPress 3.3+, only for older versions
-*/
-global $table_prefix, $wp_embed, $wp_locale, $_wp_deprecated_widgets_callbacks, $wp_widget_factory;
-
 // These are still needed
 global $wpdb, $current_site, $current_blog, $wp_rewrite, $shortcode_tags, $wp;
 
-$installer = new Installer();
+$installer = new \Queensbridge\Console\WordPressInstaller();
 $installer->install();
