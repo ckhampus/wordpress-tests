@@ -74,12 +74,6 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function getMink()
     {
-        if (null === $this->mink) {
-            throw new \RuntimeException(
-                'Mink is not initialized. Forgot to call parent context setUpBeforeClass()?'
-            );
-        }
-
         return $this->mink;
     }
 
@@ -273,39 +267,6 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
             $objectMethod = $sessionObject->getMethod($method);
             return $objectMethod->invokeArgs($session, $args);
         }
-
-        /*
-        if (strpos($method, 'assert') === 0) {
-            $asserter = $this->getMink()->assertSession();
-
-            $method = str_replace('assert', '', $method);
-            $method = lcfirst($method);
-
-            $object = new \ReflectionObject($asserter);
-
-            if ($object->hasMethod($method)) {
-                try {
-                    $objectMethod = $object->getMethod($method);
-                    $objectMethod->invokeArgs($asserter, $args);
-                    $this->assertTrue(true);
-                } catch (\Exception $e) {
-                    $this->assertTrue(false, $e->getMessage());
-                }
-
-                return;
-            }
-        } else {
-            $session = $this->getSession();
-
-            $object = new \ReflectionObject($session);
-
-            if ($object->hasMethod($method)) {
-                $objectMethod = $object->getMethod($method);
-
-                return $objectMethod->invokeArgs($session, $args);
-            }
-        }
-         */
 
         throw new \BadMethodCallException("Call to undefined method ".__CLASS__."::{$method}()");
     }
