@@ -229,15 +229,11 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         return $this->getPage()->findField($locator);
     }
 
-    public function runTest()
+    public function runBare()
     {
         $this->prepareSessions();
-
-        $result = parent::runTest();
-
+        parent::runBare();
         $this->resetSessions();
-
-        return $result;
     }
 
     public function __call($method, $args)
@@ -253,6 +249,7 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
                     $objectMethod = $asserterObject->getMethod($realMethod);
                     $objectMethod->invokeArgs($asserter, $args);
                     $this->assertTrue(true);
+
                     return;
                 } catch (\Exception $e) {
                     $this->assertTrue(false, $e->getMessage());
@@ -265,6 +262,7 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
         if ($sessionObject->hasMethod($method)) {
             $objectMethod = $sessionObject->getMethod($method);
+
             return $objectMethod->invokeArgs($session, $args);
         }
 

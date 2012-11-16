@@ -2,8 +2,6 @@
 
 namespace Queensbridge;
 
-use Symfony\Component\HttpFoundation\Request;
-
 abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
 {
     private static $testCase;
@@ -15,7 +13,7 @@ abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
         if (!empty($annotations['method'])) {
             if (array_key_exists('ajax', $annotations['method'])) {
                 self::$testCase = new \WP_Ajax_UnitTestCase();
-            } else if (array_key_exists('xmlrpc', $annotations['method'])) {
+            } elseif (array_key_exists('xmlrpc', $annotations['method'])) {
                 self::$testCase = new \WP_XMLRPC_UnitTestCase();
             }
         }
@@ -27,9 +25,6 @@ abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
         self::$testCase->setUp();
     }
 
-    /**
-     * Rollback back database.
-     */
     protected function resetEnvironment()
     {
         self::$testCase->tearDown();
@@ -40,6 +35,12 @@ abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
         self::$testCase->go_to($url);
     }
 
+    /**
+     * Create a new post.
+     *
+     * @param  array   $args The post data.
+     * @return integer The post ID.
+     */
     public function createPost(array $args = array())
     {
         return self::$testCase->factory->post->create($args);
@@ -50,12 +51,24 @@ abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
         return $this->createComment($postId, 1, $args);
     }
 
+    /**
+     * Create multiple comments on a post.
+     *
+     * @param integer $postId The post ID.
+     * @param integer $count  The amount of comments to create.
+     * @param array   $args   The comment data.
+     */
     public function createComments($postId, $count = 1, array $args = array())
     {
-        return self::$testCase->factory->comment->create_post_comments($postId, $count, $args);
+        self::$testCase->factory->comment->create_post_comments($postId, $count, $args);
     }
 
-
+    /**
+     * Create a new user.
+     *
+     * @param  array   $args The user data.
+     * @return integer The user ID.
+     */
     public function createUser(array $args = array())
     {
         return self::$testCase->factory->user->create($args);
@@ -90,6 +103,7 @@ abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
         if ($object->hasMethod($method)) {
             $objectMethod = $object->getMethod($method);
             $objectMethod->setAccessible(true);
+
             return $objectMethod->invokeArgs(self::$testCase, $args);
         }
 
@@ -105,6 +119,7 @@ abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
             if ($object->hasProperty('_'.$property)) {
                 $objectProperty = $object->getProperty('_'.$property);
                 $objectProperty->setAccessible(true);
+
                 return $objectProperty->getValue(self::$testCase);
             }
         }
