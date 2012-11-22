@@ -1,5 +1,5 @@
 {
-    "hash": "61ed96363062f5f981d207cde467b2c1",
+    "hash": "91f68f08c78f9854fe4dc797c7d46553",
     "packages": [
         {
             "name": "behat/mink",
@@ -34,7 +34,7 @@
                 "behat/mink-selenium2-driver": "to enable Selenium2 (webdriver support)",
                 "behat/mink-zombie-driver": "to enable Zombie.js support"
             },
-            "time": "1352164762",
+            "time": "2012-11-06 01:19:22",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -71,20 +71,20 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/MinkBrowserKitDriver.git",
-                "reference": "f2783df62edd22c380fb6f271acd21beb3ef4908"
+                "reference": "fa865aee4796ea08d38952b840267736be833d1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/MinkBrowserKitDriver/zipball/f2783df62edd22c380fb6f271acd21beb3ef4908",
-                "reference": "f2783df62edd22c380fb6f271acd21beb3ef4908",
+                "url": "https://github.com/Behat/MinkBrowserKitDriver/archive/fa865aee4796ea08d38952b840267736be833d1d.zip",
+                "reference": "fa865aee4796ea08d38952b840267736be833d1d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "symfony/browser-kit": ">=2.0.0,<2.2.0",
-                "symfony/dom-crawler": ">=2.0.0,<2.2.0"
+                "symfony/browser-kit": ">=2.0.0,<2.3-dev",
+                "symfony/dom-crawler": ">=2.0.0,<2.3-dev"
             },
-            "time": "1350380173",
+            "time": "2012-11-18 17:19:25",
             "type": "mink-driver",
             "installation-source": "source",
             "autoload": {
@@ -120,7 +120,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/MinkGoutteDriver/zipball/fa0fb4f43361d8d386a8b62a1b82f3ea0a511693",
+                "url": "https://github.com/Behat/MinkGoutteDriver/archive/fa0fb4f43361d8d386a8b62a1b82f3ea0a511693.zip",
                 "reference": "fa0fb4f43361d8d386a8b62a1b82f3ea0a511693",
                 "shasum": ""
             },
@@ -135,7 +135,7 @@
                 "symfony/process": "2.1.*@dev",
                 "fabpot/goutte": "@dev"
             },
-            "time": "1350381716",
+            "time": "2012-10-16 10:01:56",
             "type": "mink-driver",
             "installation-source": "source",
             "autoload": {
@@ -168,12 +168,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/MinkSelenium2Driver.git",
-                "reference": "0055619fe60116ccaaa636ada71710c16b7e1654"
+                "reference": "e604ce91d65d01233b3f41ca58847c30138e6867"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/MinkSelenium2Driver/zipball/0055619fe60116ccaaa636ada71710c16b7e1654",
-                "reference": "0055619fe60116ccaaa636ada71710c16b7e1654",
+                "url": "https://github.com/Behat/MinkSelenium2Driver/archive/e604ce91d65d01233b3f41ca58847c30138e6867.zip",
+                "reference": "e604ce91d65d01233b3f41ca58847c30138e6867",
                 "shasum": ""
             },
             "require": {
@@ -181,7 +181,7 @@
                 "instaclick/php-webdriver": "@dev",
                 "behat/mink": "1.4.*"
             },
-            "time": "1349625948",
+            "time": "2012-11-21 18:42:20",
             "type": "mink-driver",
             "installation-source": "source",
             "autoload": {
@@ -216,12 +216,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Goutte",
-                "reference": "f2940f9c7c1f409159f5e9f512e575946c5cff48"
+                "reference": "7e87fd73ffd644ba0fe6c7ac01a9e1abd4105d99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Goutte/zipball/f2940f9c7c1f409159f5e9f512e575946c5cff48",
-                "reference": "f2940f9c7c1f409159f5e9f512e575946c5cff48",
+                "url": "https://github.com/fabpot/Goutte/archive/7e87fd73ffd644ba0fe6c7ac01a9e1abd4105d99.zip",
+                "reference": "7e87fd73ffd644ba0fe6c7ac01a9e1abd4105d99",
                 "shasum": ""
             },
             "require": {
@@ -232,9 +232,9 @@
                 "symfony/finder": "2.1.*",
                 "symfony/process": "2.1.*",
                 "ext-curl": "*",
-                "guzzle/http": "2.8.*"
+                "guzzle/guzzle": "3.0.*"
             },
-            "time": "1351086217",
+            "time": "2012-11-19 07:09:26",
             "type": "application",
             "extra": {
                 "branch-alias": {
@@ -263,126 +263,90 @@
             ]
         },
         {
-            "name": "guzzle/common",
-            "version": "v2.8.8",
-            "target-dir": "Guzzle/Common",
+            "name": "guzzle/guzzle",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
-                "url": "git://github.com/guzzle/common.git",
-                "reference": "v2.8.8"
+                "url": "https://github.com/guzzle/guzzle",
+                "reference": "v3.0.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/guzzle/common/zipball/v2.8.8",
-                "reference": "v2.8.8",
+                "url": "https://github.com/guzzle/guzzle/archive/v3.0.5.zip",
+                "reference": "v3.0.5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
+                "ext-curl": "*",
                 "symfony/event-dispatcher": "2.1.*"
             },
-            "time": "2012-10-15 17:42:47",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-0": {
-                    "Guzzle\\Common": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Common libraries used by Guzzle",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "log",
-                "event",
-                "cache",
-                "validation",
-                "Socket",
-                "common",
-                "batch",
-                "inflection"
-            ]
-        },
-        {
-            "name": "guzzle/http",
-            "version": "v2.8.8",
-            "target-dir": "Guzzle/Http",
-            "source": {
-                "type": "git",
-                "url": "git://github.com/guzzle/http.git",
-                "reference": "v2.8.8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/guzzle/http/zipball/v2.8.8",
-                "reference": "v2.8.8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
+            "replace": {
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
                 "guzzle/common": "self.version",
-                "guzzle/parser": "self.version"
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "guzzle/iterator": "self.version",
+                "guzzle/log": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/plugin": "self.version",
+                "guzzle/plugin-async": "self.version",
+                "guzzle/plugin-backoff": "self.version",
+                "guzzle/plugin-cache": "self.version",
+                "guzzle/plugin-cookie": "self.version",
+                "guzzle/plugin-curlauth": "self.version",
+                "guzzle/plugin-history": "self.version",
+                "guzzle/plugin-log": "self.version",
+                "guzzle/plugin-md5": "self.version",
+                "guzzle/plugin-mock": "self.version",
+                "guzzle/plugin-oauth": "self.version",
+                "guzzle/service": "self.version",
+                "guzzle/stream": "self.version"
             },
-            "time": "2012-10-15 17:42:47",
+            "require-dev": {
+                "doctrine/common": "*",
+                "symfony/class-loader": "*",
+                "monolog/monolog": "1.*",
+                "zendframework/zend-cache": "2.0.*",
+                "zendframework/zend-log": "2.0.*",
+                "zend/zend-log1": "1.12",
+                "zend/zend-cache1": "1.12",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "time": "2012-11-19 00:15:33",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-0": {
-                    "Guzzle\\Http": ""
+                    "Guzzle\\Tests": "tests/",
+                    "Guzzle": "src/"
                 }
             },
             "license": [
                 "MIT"
             ],
-            "description": "HTTP libraries used by Guzzle",
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
+                "framework",
                 "curl",
                 "http",
+                "rest",
                 "http client",
                 "client",
-                "Guzzle"
-            ]
-        },
-        {
-            "name": "guzzle/parser",
-            "version": "v2.8.8",
-            "target-dir": "Guzzle/Parser",
-            "source": {
-                "type": "git",
-                "url": "git://github.com/guzzle/parser.git",
-                "reference": "v2.8.8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/guzzle/parser/zipball/v2.8.8",
-                "reference": "v2.8.8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "time": "2012-09-20 13:28:06",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-0": {
-                    "Guzzle\\Parser": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Interchangeable parsers used by Guzzle",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "http",
-                "url",
-                "message",
-                "cookie",
-                "URI Template"
+                "web service"
             ]
         },
         {
@@ -391,18 +355,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/instaclick/php-webdriver",
-                "reference": "v1.0.8"
+                "reference": "1.0.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/instaclick/php-webdriver/zipball/v1.0.8",
-                "reference": "v1.0.8",
+                "url": "https://github.com/instaclick/php-webdriver/archive/1.0.9.zip",
+                "reference": "1.0.9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1351218365",
+            "time": "2012-11-20 19:48:34",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -440,12 +404,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "f8bcb9100f8893511d6bdc44def82559ce18e210"
+                "reference": "f8d3cc3557f1c8026459435c199d245b115291e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sebastianbergmann/php-code-coverage/archive/f8bcb9100f8893511d6bdc44def82559ce18e210.zip",
-                "reference": "f8bcb9100f8893511d6bdc44def82559ce18e210",
+                "url": "https://github.com/sebastianbergmann/php-code-coverage/archive/f8d3cc3557f1c8026459435c199d245b115291e3.zip",
+                "reference": "f8d3cc3557f1c8026459435c199d245b115291e3",
                 "shasum": ""
             },
             "require": {
@@ -458,7 +422,7 @@
                 "ext-dom": "*",
                 "ext-xdebug": ">=2.2.1"
             },
-            "time": "1352561665",
+            "time": "2012-11-20 21:29:52",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -509,7 +473,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1350290255",
+            "time": "2012-10-15 08:37:35",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -554,7 +518,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1351707328",
+            "time": "2012-10-31 18:15:28",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -598,7 +562,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1350290346",
+            "time": "2012-10-15 08:39:06",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -643,7 +607,7 @@
                 "ext-tokenizer": "*",
                 "php": ">=5.3.3"
             },
-            "time": "1350290650",
+            "time": "2012-10-15 08:44:10",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -762,7 +726,7 @@
             "suggest": {
                 "ext-soap": "*"
             },
-            "time": "1352894736",
+            "time": "2012-11-14 12:05:36",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -794,6 +758,34 @@
                 "mock",
                 "xunit"
             ]
+        },
+        {
+            "name": "queensbridge/wordpress-tests-library",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckhampus/wp-tests-lib",
+                "reference": "87ab4082ec97ee9a152b436a11a5df974064f5d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ckhampus/wp-tests-lib/zipball/87ab4082ec97ee9a152b436a11a5df974064f5d9",
+                "reference": "87ab4082ec97ee9a152b436a11a5df974064f5d9",
+                "shasum": ""
+            },
+            "time": "2012-11-21 16:21:11",
+            "type": "library",
+            "installation-source": "source",
+            "authors": [
+                {
+                    "name": "Cristian Hampus",
+                    "email": "cristian@queensbridge.se"
+                }
+            ],
+            "description": "Mirror of WordPress Testing library",
+            "support": {
+                "source": "https://github.com/ckhampus/wp-tests-lib/tree/master"
+            }
         },
         {
             "name": "selenium/selenium-server-standalone",
@@ -833,7 +825,7 @@
             "suggest": {
                 "symfony/process": "2.1.*"
             },
-            "time": "1352368308",
+            "time": "2012-11-08 09:51:48",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -880,7 +872,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1352368308",
+            "time": "2012-11-08 09:51:48",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -933,7 +925,7 @@
             "suggest": {
                 "symfony/css-selector": "2.1.*"
             },
-            "time": "1352368308",
+            "time": "2012-11-08 09:51:48",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -987,7 +979,7 @@
                 "symfony/dependency-injection": "2.1.*",
                 "symfony/http-kernel": "2.1.*"
             },
-            "time": "1352368308",
+            "time": "2012-11-08 09:51:48",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1017,53 +1009,6 @@
             "homepage": "http://symfony.com"
         },
         {
-            "name": "symfony/filesystem",
-            "version": "2.1.x-dev",
-            "target-dir": "Symfony/Component/Filesystem",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Filesystem",
-                "reference": "cc45afc276fab51b086137ddf37d507379d1cf3e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/symfony/Filesystem/archive/cc45afc276fab51b086137ddf37d507379d1cf3e.zip",
-                "reference": "cc45afc276fab51b086137ddf37d507379d1cf3e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "time": "1352368308",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Filesystem": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Filesystem Component",
-            "homepage": "http://symfony.com"
-        },
-        {
             "name": "symfony/finder",
             "version": "2.1.x-dev",
             "target-dir": "Symfony/Component/Finder",
@@ -1081,7 +1026,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1352368308",
+            "time": "2012-11-08 09:51:48",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1117,18 +1062,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process",
-                "reference": "5437d5f85a089d227337a8be4a46d160b60e1ab1"
+                "reference": "a7938028486f28dd611787fb691eff273f9c2752"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Process/archive/5437d5f85a089d227337a8be4a46d160b60e1ab1.zip",
-                "reference": "5437d5f85a089d227337a8be4a46d160b60e1ab1",
+                "url": "https://github.com/symfony/Process/archive/a7938028486f28dd611787fb691eff273f9c2752.zip",
+                "reference": "a7938028486f28dd611787fb691eff273f9c2752",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1352368308",
+            "time": "2012-11-19 20:53:52",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1175,7 +1120,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1352815684",
+            "time": "2012-11-13 14:08:04",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1203,23 +1148,6 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com"
-        },
-        {
-            "name": "wordpress/test-framework",
-            "version": "dev-master",
-            "source": {
-                "type": "svn",
-                "url": "http://unit-test.svn.wordpress.org/trunk/",
-                "reference": "includes/"
-            },
-            "type": "library",
-            "installation-source": "source",
-            "authors": [
-                {
-                    "name": "WordPress Foundation",
-                    "homepage": "http://wordpress.org"
-                }
-            ]
         }
     ],
     "packages-dev": [
@@ -1229,12 +1157,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/PHP-CS-Fixer.git",
-                "reference": "24df86b1a29a9f6151e495615123308542bcfb05"
+                "reference": "v0.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/PHP-CS-Fixer/zipball/24df86b1a29a9f6151e495615123308542bcfb05",
-                "reference": "24df86b1a29a9f6151e495615123308542bcfb05",
+                "url": "https://github.com/fabpot/PHP-CS-Fixer/archive/v0.1.0.zip",
+                "reference": "v0.1.0",
                 "shasum": ""
             },
             "require": {
@@ -1243,11 +1171,16 @@
                 "symfony/finder": "2.1.*",
                 "php": ">=5.3.3"
             },
-            "time": "1349504510",
+            "time": "2012-11-20 07:00:21",
             "bin": [
                 "php-cs-fixer"
             ],
             "type": "application",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
             "installation-source": "source",
             "autoload": {
                 "psr-0": {
@@ -1283,7 +1216,7 @@
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1352451171",
+            "time": "2012-11-09 08:52:51",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1310,6 +1243,53 @@
                 }
             ],
             "description": "Symfony Console Component",
+            "homepage": "http://symfony.com"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "2.1.x-dev",
+            "target-dir": "Symfony/Component/Filesystem",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Filesystem",
+                "reference": "aa34ce62326260b1a911deafaa5bb2bf898e7d65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/Filesystem/archive/aa34ce62326260b1a911deafaa5bb2bf898e7d65.zip",
+                "reference": "aa34ce62326260b1a911deafaa5bb2bf898e7d65",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "2012-11-20 13:21:32",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Filesystem": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com"
         },
         {

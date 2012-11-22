@@ -5,7 +5,7 @@ namespace Queensbridge\Tests;
 use Queensbridge\IntegrationTestCase;
 
 /**
- * Admin ajax functions to be tested
+ * Admin ajax functions to be tested.
  */
 require_once( ABSPATH . 'wp-admin/includes/ajax-actions.php' );
 

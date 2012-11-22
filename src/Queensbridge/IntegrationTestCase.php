@@ -48,7 +48,7 @@ abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
 
     public function createComment($postId, array $args = array())
     {
-        return $this->createComment($postId, 1, $args);
+        return $this->createComments($postId, 1, $args);
     }
 
     /**
