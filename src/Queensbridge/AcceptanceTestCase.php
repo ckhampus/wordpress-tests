@@ -144,7 +144,8 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
      */
     public function choose($locator)
     {
-
+        $el = $this->findField($locator);
+        $this->findField($locator)->selectOption($el->getAttribute('value'));
     }
 
     /**
