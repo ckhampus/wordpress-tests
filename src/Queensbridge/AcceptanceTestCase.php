@@ -74,12 +74,6 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
     public function getMink()
     {
-        if (null === $this->mink) {
-            throw new \RuntimeException(
-                'Mink is not initialized. Forgot to call parent context setUpBeforeClass()?'
-            );
-        }
-
         return $this->mink;
     }
 
@@ -235,15 +229,11 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
         return $this->getPage()->findField($locator);
     }
 
-    public function runTest()
+    public function runBare()
     {
         $this->prepareSessions();
-
-        $result = parent::runTest();
-
+        parent::runBare();
         $this->resetSessions();
-
-        return $result;
     }
 
     public function __call($method, $args)
@@ -259,6 +249,7 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
                     $objectMethod = $asserterObject->getMethod($realMethod);
                     $objectMethod->invokeArgs($asserter, $args);
                     $this->assertTrue(true);
+
                     return;
                 } catch (\Exception $e) {
                     $this->assertTrue(false, $e->getMessage());
@@ -271,41 +262,9 @@ abstract class AcceptanceTestCase  extends \PHPUnit_Framework_TestCase
 
         if ($sessionObject->hasMethod($method)) {
             $objectMethod = $sessionObject->getMethod($method);
+
             return $objectMethod->invokeArgs($session, $args);
         }
-
-        /*
-        if (strpos($method, 'assert') === 0) {
-            $asserter = $this->getMink()->assertSession();
-
-            $method = str_replace('assert', '', $method);
-            $method = lcfirst($method);
-
-            $object = new \ReflectionObject($asserter);
-
-            if ($object->hasMethod($method)) {
-                try {
-                    $objectMethod = $object->getMethod($method);
-                    $objectMethod->invokeArgs($asserter, $args);
-                    $this->assertTrue(true);
-                } catch (\Exception $e) {
-                    $this->assertTrue(false, $e->getMessage());
-                }
-
-                return;
-            }
-        } else {
-            $session = $this->getSession();
-
-            $object = new \ReflectionObject($session);
-
-            if ($object->hasMethod($method)) {
-                $objectMethod = $object->getMethod($method);
-
-                return $objectMethod->invokeArgs($session, $args);
-            }
-        }
-         */
 
         throw new \BadMethodCallException("Call to undefined method ".__CLASS__."::{$method}()");
     }

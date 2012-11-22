@@ -2,172 +2,126 @@
 
 namespace Queensbridge;
 
-use Symfony\Component\HttpFoundation\Request;
-
 abstract class IntegrationTestCase extends \PHPUnit_Framework_TestCase
 {
-    private $backup = array();
+    private static $testCase;
 
     protected function prepareEnvironment()
     {
-        $this->backup['_SERVER'] = $_SERVER;
+        $annotations = $this->getAnnotations();
 
-        $GLOBALS['wpdb']->suppress_errors = false;
-        $GLOBALS['wpdb']->show_errors = true;
-        $GLOBALS['wpdb']->db_connect();
+        if (!empty($annotations['method'])) {
+            if (array_key_exists('ajax', $annotations['method'])) {
+                self::$testCase = new \WP_Ajax_UnitTestCase();
+            } elseif (array_key_exists('xmlrpc', $annotations['method'])) {
+                self::$testCase = new \WP_XMLRPC_UnitTestCase();
+            }
+        }
 
-        ini_set('display_errors', 1);
+        if (self::$testCase === null) {
+            self::$testCase = new \WP_UnitTestCase();
+        }
 
-        $this->clearGlobals();
-        $this->startTransaction();
+        self::$testCase->setUp();
     }
 
-    /**
-     * Rollback back database.
-     */
     protected function resetEnvironment()
     {
-        $GLOBALS['wpdb']->query('ROLLBACK');
-
-        $_SERVER = $this->backup['_SERVER'];
-    }
-
-    /**
-     * Clear all global variables and flush cache.
-     */
-    protected function clearGlobals()
-    {
-        $_GET = array();
-        $_POST = array();
-        $_REQUEST = array();
-        $_SERVER = array();
-        $_COOKIE = array();
-        $_FILES = array();
-
-        $this->flushCache();
-    }
-
-    /**
-     * Flush WordPress object cache.
-     */
-    protected function flushCache()
-    {
-        $GLOBALS['wp_object_cache']->group_ops = array();
-        $GLOBALS['wp_object_cache']->stats = array();
-        $GLOBALS['wp_object_cache']->memcache_debug = array();
-        $GLOBALS['wp_object_cache']->cache = array();
-
-        if (method_exists($GLOBALS['wp_object_cache'], '__remoteset')) {
-            $GLOBALS['wp_object_cache']->__remoteset();
-        }
-        wp_cache_flush();
-    }
-
-    /**
-     * Start database transaction.
-     */
-    protected function startTransaction()
-    {
-        $GLOBALS['wpdb']->query('SET autocommit = 0;');
-        $GLOBALS['wpdb']->query('START TRANSACTION;');
-    }
-
-    public function assertWPError( $actual, $message = '' )
-    {
-        $this->assertTrue(is_wp_error( $actual ), $message);
+        self::$testCase->tearDown();
     }
 
     public function visit($url)
     {
-        $this->clearGlobals();
-
-        $vars = array(
-            'query_string',
-            'id',
-            'postdata',
-            'authordata',
-            'day',
-            'currentmonth',
-            'page',
-            'pages',
-            'multipage',
-            'more',
-            'numpages',
-            'pagenow'
-        );
-
-        foreach ($vars as $var) {
-            if (isset($GLOBALS[$var])) {
-                unset($GLOBALS[$var]);
-            }
-        }
-
-        $request = Request::create($url);
-        $request->overrideGlobals();
-
-        unset($GLOBALS['wp_query'], $GLOBALS['wp_the_query']);
-        $GLOBALS['wp_the_query'] =& new \WP_Query();
-        $GLOBALS['wp_query'] =& $GLOBALS['wp_the_query'];
-        $GLOBALS['wp'] =& new \WP();
-
-        // clean out globals to stop them polluting wp and wp_query
-        foreach ($GLOBALS['wp']->public_query_vars as $v) {
-            unset($GLOBALS[$v]);
-        }
-        foreach ($GLOBALS['wp']->private_query_vars as $v) {
-            unset($GLOBALS[$v]);
-        }
-
-        $GLOBALS['wp']->main($request->getQueryString());
-
-        if (strpos($request->getPathInfo(), 'wp-admin')) {
-            $this->initializeAdmin();
-        }
+        self::$testCase->go_to($url);
     }
 
-    protected function initializeAdmin()
+    /**
+     * Create a new post.
+     *
+     * @param  array   $args The post data.
+     * @return integer The post ID.
+     */
+    public function createPost(array $args = array())
     {
-        if (!defined('WP_ADMIN')) {
-            define('WP_ADMIN', true);
-        }
-
-        if (!defined('WP_NETWORK_ADMIN')) {
-            define('WP_NETWORK_ADMIN', false);
-        }
-
-        if (!defined('WP_USER_ADMIN')) {
-            define('WP_USER_ADMIN', false);
-        }
-
-        if (!WP_NETWORK_ADMIN && ! WP_USER_ADMIN) {
-            define('WP_BLOG_ADMIN', true);
-        }
-
-        if (isset($_GET['import']) && !defined('WP_LOAD_IMPORTERS')) {
-            define('WP_LOAD_IMPORTERS', true);
-        }
-
-        require_once(ABSPATH . 'wp-admin/includes/admin.php');
-
-        if (WP_NETWORK_ADMIN) {
-            require(ABSPATH . 'wp-admin/network/menu.php');
-        } elseif (WP_USER_ADMIN) {
-            require(ABSPATH . 'wp-admin/user/menu.php');
-        } else {
-            require(ABSPATH . 'wp-admin/menu.php');
-        }
-
-        do_action('admin_init');
+        return self::$testCase->factory->post->create($args);
     }
 
-    public function runTest()
+    public function createComment($postId, array $args = array())
+    {
+        return $this->createComments($postId, 1, $args);
+    }
+
+    /**
+     * Create multiple comments on a post.
+     *
+     * @param integer $postId The post ID.
+     * @param integer $count  The amount of comments to create.
+     * @param array   $args   The comment data.
+     */
+    public function createComments($postId, $count = 1, array $args = array())
+    {
+        self::$testCase->factory->comment->create_post_comments($postId, $count, $args);
+    }
+
+    /**
+     * Create a new user.
+     *
+     * @param  array   $args The user data.
+     * @return integer The user ID.
+     */
+    public function createUser(array $args = array())
+    {
+        return self::$testCase->factory->user->create($args);
+    }
+
+    public function createTerm(array $args = array())
+    {
+        return self::$testCase->factory->term->create($args);
+    }
+
+    public function createCategory(array $args = array())
+    {
+        return self::$testCase->factory->category->create($args);
+    }
+
+    public function createTag(array $args = array())
+    {
+        return self::$testCase->factory->tag->create($args);
+    }
+
+    public function runBare()
     {
         $this->prepareEnvironment();
-
-        $result = parent::runTest();
-
+        parent::runBare();
         $this->resetEnvironment();
+    }
 
-        return $result;
+    public function __call($method, $args)
+    {
+        $object = new \ReflectionObject(self::$testCase);
+
+        if ($object->hasMethod($method)) {
+            $objectMethod = $object->getMethod($method);
+            $objectMethod->setAccessible(true);
+
+            return $objectMethod->invokeArgs(self::$testCase, $args);
+        }
+
+        if (substr($method, 0, 3) === 'get') {
+            $property = substr($method, 3);
+
+            $word = preg_replace('/([A-Z\d]+)([A-Z][a-z])/', '\1_\2', $property);
+            $word = preg_replace('/([a-z\d])([A-Z])/', '\1_\2', $word);
+            $word = str_replace(' ', '_', $word);
+            $word = str_replace('-', '_', $word);
+            $property = strtolower($word);
+
+            if ($object->hasProperty('_'.$property)) {
+                $objectProperty = $object->getProperty('_'.$property);
+                $objectProperty->setAccessible(true);
+
+                return $objectProperty->getValue(self::$testCase);
+            }
+        }
     }
 }

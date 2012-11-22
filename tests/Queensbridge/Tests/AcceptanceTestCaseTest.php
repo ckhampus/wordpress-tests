@@ -7,15 +7,6 @@ use Queensbridge\AcceptanceTestCase;
 class AcceptanceTestCaseTest extends AcceptanceTestCase
 {
     /**
-     * @expectedException RuntimeException
-     */
-    public function testAcceptanceTestCaseException()
-    {
-        $test = $this->getMockForAbstractClass('Queensbridge\AcceptanceTestCase');
-        $test->getMink();
-    }
-
-    /**
      * @expectedException BadMethodCallException
      */
     public function testBadMethodCall()

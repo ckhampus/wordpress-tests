@@ -1,13 +1,12 @@
 # WordPress Tests
-This is a library for writing tests for plugins, themes and sites. 
-
-## Unit tests
-The `UnitTestCase` class is used just like the normal `PHPUnit_Framework_TestCase` class. Right it is basically just a shortcut.
+This is a library for writing tests for plugins, themes and sites.
 
 ## Integration tests
 The `IntegrationTestCase` class allows you to test against and use WordPress functions in your tests.
 
 ```php
+use Queensbridge\IntegrationTestCase;
+
 class SinglePageTest extends IntegrationTestCase
 {
     public function testSingle()
@@ -23,6 +22,8 @@ class SinglePageTest extends IntegrationTestCase
 The `AcceptanceTestCase` class uses Mink and allows you to test the output of your site. Depending if you require JavaScript for your test or not, this test case will either use Selenium 2 or Goutte as drivers.
 
 ```php
+use Queensbridge\AcceptanceTestCase;
+
 class WikipediaSearchTest extends AcceptanceTestCase
 {
     /**
@@ -58,5 +59,3 @@ class WikipediaSearchTest extends AcceptanceTestCase
     }
 }
 ```
-
-
