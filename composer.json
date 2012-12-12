@@ -13,8 +13,7 @@
         "phpunit/phpunit": "3.7.8",
         "behat/mink": "*",
         "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*",
-        "queensbridge/wordpress-tests-library": "*"
+        "behat/mink-selenium2-driver": "*"
     },
     "require-dev": {
         "wordpress/wordpress": "3.4.2",

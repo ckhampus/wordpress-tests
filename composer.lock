@@ -1,5 +1,5 @@
 {
-    "hash": "91f68f08c78f9854fe4dc797c7d46553",
+    "hash": "d6c89b65d4d53cb563c90f2a4e5d6c70",
     "packages": [
         {
             "name": "behat/mink",
@@ -116,26 +116,26 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/MinkGoutteDriver.git",
-                "reference": "fa0fb4f43361d8d386a8b62a1b82f3ea0a511693"
+                "reference": "b563bf8286e0dae12dac7935cf5dc16adfe60a56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/MinkGoutteDriver/archive/fa0fb4f43361d8d386a8b62a1b82f3ea0a511693.zip",
-                "reference": "fa0fb4f43361d8d386a8b62a1b82f3ea0a511693",
+                "url": "https://github.com/Behat/MinkGoutteDriver/archive/b563bf8286e0dae12dac7935cf5dc16adfe60a56.zip",
+                "reference": "b563bf8286e0dae12dac7935cf5dc16adfe60a56",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "behat/mink-browserkit-driver": "*",
                 "behat/mink": ">=1.4.0,<1.5.0-dev",
                 "symfony/browser-kit": "2.1.*@dev",
                 "symfony/css-selector": "2.1.*@dev",
                 "symfony/dom-crawler": "2.1.*@dev",
                 "symfony/finder": "2.1.*@dev",
                 "symfony/process": "2.1.*@dev",
-                "fabpot/goutte": "@dev"
+                "fabpot/goutte": "@dev",
+                "behat/mink-browserkit-driver": "*@dev"
             },
-            "time": "2012-10-16 10:01:56",
+            "time": "2012-11-29 22:05:37",
             "type": "mink-driver",
             "installation-source": "source",
             "autoload": {
@@ -143,6 +143,7 @@
                     "Behat\\Mink\\Driver": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -216,12 +217,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Goutte",
-                "reference": "7e87fd73ffd644ba0fe6c7ac01a9e1abd4105d99"
+                "reference": "70c036b3ffe33521b95b8223bf062ae007da619f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Goutte/archive/7e87fd73ffd644ba0fe6c7ac01a9e1abd4105d99.zip",
-                "reference": "7e87fd73ffd644ba0fe6c7ac01a9e1abd4105d99",
+                "url": "https://github.com/fabpot/Goutte/archive/70c036b3ffe33521b95b8223bf062ae007da619f.zip",
+                "reference": "70c036b3ffe33521b95b8223bf062ae007da619f",
                 "shasum": ""
             },
             "require": {
@@ -234,7 +235,7 @@
                 "ext-curl": "*",
                 "guzzle/guzzle": "3.0.*"
             },
-            "time": "2012-11-19 07:09:26",
+            "time": "2012-12-03 13:38:32",
             "type": "application",
             "extra": {
                 "branch-alias": {
@@ -247,6 +248,7 @@
                     "Goutte": "."
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -264,32 +266,32 @@
         },
         {
             "name": "guzzle/guzzle",
-            "version": "v3.0.5",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle",
-                "reference": "v3.0.5"
+                "reference": "3eb19b745b46e82440981163be69eb9f4de5b664"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/guzzle/guzzle/archive/v3.0.5.zip",
-                "reference": "v3.0.5",
+                "url": "https://github.com/guzzle/guzzle/archive/3eb19b745b46e82440981163be69eb9f4de5b664.zip",
+                "reference": "3eb19b745b46e82440981163be69eb9f4de5b664",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
                 "ext-curl": "*",
-                "symfony/event-dispatcher": "2.1.*"
+                "symfony/event-dispatcher": ">=2.1"
             },
             "replace": {
-                "guzzle/batch": "self.version",
-                "guzzle/cache": "self.version",
                 "guzzle/common": "self.version",
                 "guzzle/http": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
                 "guzzle/inflection": "self.version",
                 "guzzle/iterator": "self.version",
                 "guzzle/log": "self.version",
-                "guzzle/parser": "self.version",
                 "guzzle/plugin": "self.version",
                 "guzzle/plugin-async": "self.version",
                 "guzzle/plugin-backoff": "self.version",
@@ -298,31 +300,43 @@
                 "guzzle/plugin-curlauth": "self.version",
                 "guzzle/plugin-history": "self.version",
                 "guzzle/plugin-log": "self.version",
-                "guzzle/plugin-md5": "self.version",
                 "guzzle/plugin-mock": "self.version",
                 "guzzle/plugin-oauth": "self.version",
                 "guzzle/service": "self.version",
-                "guzzle/stream": "self.version"
+                "guzzle/stream": "self.version",
+                "guzzle/plugin-md5": "self.version"
             },
             "require-dev": {
                 "doctrine/common": "*",
                 "symfony/class-loader": "*",
                 "monolog/monolog": "1.*",
-                "zendframework/zend-cache": "2.0.*",
-                "zendframework/zend-log": "2.0.*",
                 "zend/zend-log1": "1.12",
                 "zend/zend-cache1": "1.12",
+                "zendframework/zend-cache": "2.0.*",
+                "zendframework/zend-log": "2.0.*",
                 "phpunit/phpunit": "3.7.*"
             },
-            "time": "2012-11-19 00:15:33",
+            "suggest": {
+                "symfony/class-loader": "*",
+                "monolog/monolog": "*",
+                "zend/zend-cache": "2.0.0beta3",
+                "zend/zend-log": "2.0.0beta3"
+            },
+            "time": "2012-12-11 02:35:58",
             "type": "library",
-            "installation-source": "dist",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Guzzle\\Tests": "tests/",
                     "Guzzle": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -355,18 +369,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/instaclick/php-webdriver",
-                "reference": "1.0.9"
+                "reference": "1.0.11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/instaclick/php-webdriver/archive/1.0.9.zip",
-                "reference": "1.0.9",
+                "url": "https://github.com/instaclick/php-webdriver/archive/1.0.11.zip",
+                "reference": "1.0.11",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "2012-11-20 19:48:34",
+            "time": "2012-12-02 22:08:47",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -374,6 +388,7 @@
                     "WebDriver": "lib/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache"
             ],
@@ -404,12 +419,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "f8d3cc3557f1c8026459435c199d245b115291e3"
+                "reference": "f1fa5e0813269cc6f3cdd80a369aba3ce8bca06d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sebastianbergmann/php-code-coverage/archive/f8d3cc3557f1c8026459435c199d245b115291e3.zip",
-                "reference": "f8d3cc3557f1c8026459435c199d245b115291e3",
+                "url": "https://github.com/sebastianbergmann/php-code-coverage/archive/f1fa5e0813269cc6f3cdd80a369aba3ce8bca06d.zip",
+                "reference": "f1fa5e0813269cc6f3cdd80a369aba3ce8bca06d",
                 "shasum": ""
             },
             "require": {
@@ -422,7 +437,7 @@
                 "ext-dom": "*",
                 "ext-xdebug": ">=2.2.1"
             },
-            "time": "2012-11-20 21:29:52",
+            "time": "2012-12-10 18:20:18",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -435,6 +450,7 @@
                     "PHP/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 ""
             ],
@@ -711,12 +727,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "e8af681b12f6178ff07184ee8b7dea724479beb9"
+                "reference": "01499550bf167fbfe3707c54da48c1142073f7d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sebastianbergmann/phpunit-mock-objects/archive/e8af681b12f6178ff07184ee8b7dea724479beb9.zip",
-                "reference": "e8af681b12f6178ff07184ee8b7dea724479beb9",
+                "url": "https://github.com/sebastianbergmann/phpunit-mock-objects/archive/01499550bf167fbfe3707c54da48c1142073f7d5.zip",
+                "reference": "01499550bf167fbfe3707c54da48c1142073f7d5",
                 "shasum": ""
             },
             "require": {
@@ -726,7 +742,7 @@
             "suggest": {
                 "ext-soap": "*"
             },
-            "time": "2012-11-14 12:05:36",
+            "time": "2012-11-26 06:32:58",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -739,6 +755,7 @@
                     "PHPUnit/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 ""
             ],
@@ -760,34 +777,6 @@
             ]
         },
         {
-            "name": "queensbridge/wordpress-tests-library",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ckhampus/wp-tests-lib",
-                "reference": "87ab4082ec97ee9a152b436a11a5df974064f5d9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/ckhampus/wp-tests-lib/zipball/87ab4082ec97ee9a152b436a11a5df974064f5d9",
-                "reference": "87ab4082ec97ee9a152b436a11a5df974064f5d9",
-                "shasum": ""
-            },
-            "time": "2012-11-21 16:21:11",
-            "type": "library",
-            "installation-source": "source",
-            "authors": [
-                {
-                    "name": "Cristian Hampus",
-                    "email": "cristian@queensbridge.se"
-                }
-            ],
-            "description": "Mirror of WordPress Testing library",
-            "support": {
-                "source": "https://github.com/ckhampus/wp-tests-lib/tree/master"
-            }
-        },
-        {
             "name": "selenium/selenium-server-standalone",
             "version": "2.25.0",
             "dist": {
@@ -806,12 +795,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit",
-                "reference": "eff7eff62a8bccbe7998ecbde4d612bb8da963ff"
+                "reference": "2f09aa1427dc5af5a3da4fe6a79830be9ff1328e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/BrowserKit/archive/eff7eff62a8bccbe7998ecbde4d612bb8da963ff.zip",
-                "reference": "eff7eff62a8bccbe7998ecbde4d612bb8da963ff",
+                "url": "https://github.com/symfony/BrowserKit/archive/2f09aa1427dc5af5a3da4fe6a79830be9ff1328e.zip",
+                "reference": "2f09aa1427dc5af5a3da4fe6a79830be9ff1328e",
                 "shasum": ""
             },
             "require": {
@@ -825,19 +814,15 @@
             "suggest": {
                 "symfony/process": "2.1.*"
             },
-            "time": "2012-11-08 09:51:48",
+            "time": "2012-12-06 10:00:55",
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
             "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony\\Component\\BrowserKit": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -861,30 +846,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/CssSelector",
-                "reference": "abf8279792230c6685234eb0fa95b0a85e9e9c7a"
+                "reference": "3bf44fd37af95e0fd7764040abf9744f189fba05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/CssSelector/archive/abf8279792230c6685234eb0fa95b0a85e9e9c7a.zip",
-                "reference": "abf8279792230c6685234eb0fa95b0a85e9e9c7a",
+                "url": "https://github.com/symfony/CssSelector/archive/3bf44fd37af95e0fd7764040abf9744f189fba05.zip",
+                "reference": "3bf44fd37af95e0fd7764040abf9744f189fba05",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-11-08 09:51:48",
+            "time": "2012-12-11 10:33:11",
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
             "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony\\Component\\CssSelector": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -908,12 +889,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler",
-                "reference": "8fe81036d0f7452c2bf75b6d489f1e646741bf0f"
+                "reference": "96ee94d706f898a3a1009dd818e844554caa368f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/DomCrawler/archive/8fe81036d0f7452c2bf75b6d489f1e646741bf0f.zip",
-                "reference": "8fe81036d0f7452c2bf75b6d489f1e646741bf0f",
+                "url": "https://github.com/symfony/DomCrawler/archive/96ee94d706f898a3a1009dd818e844554caa368f.zip",
+                "reference": "96ee94d706f898a3a1009dd818e844554caa368f",
                 "shasum": ""
             },
             "require": {
@@ -925,19 +906,15 @@
             "suggest": {
                 "symfony/css-selector": "2.1.*"
             },
-            "time": "2012-11-08 09:51:48",
+            "time": "2012-12-06 10:00:55",
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
             "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony\\Component\\DomCrawler": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -956,42 +933,43 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "2.1.x-dev",
+            "version": "dev-master",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher",
-                "reference": "b5b6807bcc192f3a1c4fba7ef48466ebbd3c4485"
+                "reference": "eb290a447c0af5bea0d3de5d95d498afd8c82f89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/EventDispatcher/archive/b5b6807bcc192f3a1c4fba7ef48466ebbd3c4485.zip",
-                "reference": "b5b6807bcc192f3a1c4fba7ef48466ebbd3c4485",
+                "url": "https://github.com/symfony/EventDispatcher/archive/eb290a447c0af5bea0d3de5d95d498afd8c82f89.zip",
+                "reference": "eb290a447c0af5bea0d3de5d95d498afd8c82f89",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/dependency-injection": "2.1.*"
+                "symfony/dependency-injection": "2.2.*"
             },
             "suggest": {
-                "symfony/dependency-injection": "2.1.*",
-                "symfony/http-kernel": "2.1.*"
+                "symfony/dependency-injection": "2.2.*",
+                "symfony/http-kernel": "2.2.*"
             },
-            "time": "2012-11-08 09:51:48",
+            "time": "2012-11-13 14:08:04",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "installation-source": "source",
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\EventDispatcher": ""
+                    "Symfony\\Component\\EventDispatcher\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1015,30 +993,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder",
-                "reference": "24e814560125249010dd08717f4d17079c061e98"
+                "reference": "d9cc0a82455be6a49ffbfe2fb014da78d0b8c354"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Finder/archive/24e814560125249010dd08717f4d17079c061e98.zip",
-                "reference": "24e814560125249010dd08717f4d17079c061e98",
+                "url": "https://github.com/symfony/Finder/archive/d9cc0a82455be6a49ffbfe2fb014da78d0b8c354.zip",
+                "reference": "d9cc0a82455be6a49ffbfe2fb014da78d0b8c354",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-11-08 09:51:48",
+            "time": "2012-12-10 12:46:54",
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
             "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony\\Component\\Finder": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1062,30 +1036,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process",
-                "reference": "a7938028486f28dd611787fb691eff273f9c2752"
+                "reference": "7468a4995e421741e37467613889765f0b21c329"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Process/archive/a7938028486f28dd611787fb691eff273f9c2752.zip",
-                "reference": "a7938028486f28dd611787fb691eff273f9c2752",
+                "url": "https://github.com/symfony/Process/archive/7468a4995e421741e37467613889765f0b21c329.zip",
+                "reference": "7468a4995e421741e37467613889765f0b21c329",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2012-11-19 20:53:52",
+            "time": "2012-12-11 10:40:22",
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
             "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Symfony\\Component\\Process": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1150,172 +1120,7 @@
             "homepage": "http://symfony.com"
         }
     ],
-    "packages-dev": [
-        {
-            "name": "fabpot/php-cs-fixer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fabpot/PHP-CS-Fixer.git",
-                "reference": "v0.1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/fabpot/PHP-CS-Fixer/archive/v0.1.0.zip",
-                "reference": "v0.1.0",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/console": "2.1.*",
-                "symfony/filesystem": "2.1.*",
-                "symfony/finder": "2.1.*",
-                "php": ">=5.3.3"
-            },
-            "time": "2012-11-20 07:00:21",
-            "bin": [
-                "php-cs-fixer"
-            ],
-            "type": "application",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1.x-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\CS": "."
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "A script to automatically fix Symfony Coding Standard"
-        },
-        {
-            "name": "symfony/console",
-            "version": "2.1.x-dev",
-            "target-dir": "Symfony/Component/Console",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Console",
-                "reference": "528b030bd94d74b06735c9da9fd9495db0567800"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/symfony/Console/archive/528b030bd94d74b06735c9da9fd9495db0567800.zip",
-                "reference": "528b030bd94d74b06735c9da9fd9495db0567800",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "time": "2012-11-09 08:52:51",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Console": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Console Component",
-            "homepage": "http://symfony.com"
-        },
-        {
-            "name": "symfony/filesystem",
-            "version": "2.1.x-dev",
-            "target-dir": "Symfony/Component/Filesystem",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Filesystem",
-                "reference": "aa34ce62326260b1a911deafaa5bb2bf898e7d65"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/symfony/Filesystem/archive/aa34ce62326260b1a911deafaa5bb2bf898e7d65.zip",
-                "reference": "aa34ce62326260b1a911deafaa5bb2bf898e7d65",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "time": "2012-11-20 13:21:32",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Filesystem": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Filesystem Component",
-            "homepage": "http://symfony.com"
-        },
-        {
-            "name": "wordpress/wordpress",
-            "version": "3.4.2",
-            "source": {
-                "type": "svn",
-                "url": "http://core.svn.wordpress.org",
-                "reference": "tags/3.4.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://wordpress.org/wordpress-3.4.2.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "wordpress-core",
-            "installation-source": "dist",
-            "authors": [
-                {
-                    "name": "WordPress Foundation",
-                    "homepage": "http://wordpress.org"
-                }
-            ]
-        }
-    ],
+    "packages-dev": null,
     "aliases": [
 
     ],
