@@ -3,7 +3,6 @@
  * Installs WordPress for running the tests and loads WordPress and the test libraries
  */
 
-error_reporting( E_ALL & ~E_DEPRECATED & ~E_STRICT );
 
 require_once 'PHPUnit/Autoload.php';
 

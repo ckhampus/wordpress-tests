@@ -6,3 +6,4 @@ composer.phar
 bin/behat*
 bin/php-cs-fixer
 tests/wordpress
+.DS_Store

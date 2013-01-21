@@ -13,4 +13,6 @@ function setup_test_environment($configPath) {
             return include __DIR__.'/../lib/bootstrap.php';
         }
     }
+
+    return false;
 }
